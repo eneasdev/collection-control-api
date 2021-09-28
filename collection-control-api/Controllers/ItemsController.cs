@@ -8,6 +8,7 @@ namespace collection_control_api.Controllers
     {
         public IActionResult Post([FromBody] NewItemInputModel itemInputModel)
         {
+
             return Ok();
         }
     }

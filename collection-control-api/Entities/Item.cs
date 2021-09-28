@@ -34,5 +34,6 @@ namespace collection_control_api.Entities
             Lends.Add(new Lend(lendInputModel));
         }
 
+        public abstract void Create(NewItemInputModel itemInputModel);
     }
 }
