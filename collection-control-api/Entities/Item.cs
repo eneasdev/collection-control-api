@@ -7,6 +7,5 @@
         public string Description { get; set; }
         public int ReleaseYear { get; set; }
         public Lend Lends { get; set; }
-
     }
 }

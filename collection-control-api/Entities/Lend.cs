@@ -2,9 +2,6 @@
 {
     public class Lend
     {
-        public Lend(NewLendInputModel lendInputModel)
-        {
 
-        }
     }
 }
