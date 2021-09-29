@@ -1,6 +1,4 @@
-﻿using collection_control_api.Models;
-
-namespace collection_control_api.Entities
+﻿namespace collection_control_api.Entities
 {
     public class Lend
     {
