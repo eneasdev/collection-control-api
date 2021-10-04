@@ -1,10 +1,6 @@
-﻿using collection_control_api.Models.InputModels;
+﻿using collection_control_api.Entities;
 using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace collection_control_api.Controllers
 {
@@ -16,13 +12,22 @@ namespace collection_control_api.Controllers
         {
             _cdService = cdService;
         }
-        public IActionResult Create([FromBody] NewCdInputModel inputModel)
+        public IActionResult Create([FromBody] Cd newCd)
         {
-            if (inputModel == null) return BadRequest();
+            if (newCd == null) return BadRequest();
 
-            _cdService.Create(inputModel);
+            _cdService.Create(newCd);
 
             return Ok();
+        }
+
+        public IActionResult Update([FromBody] Cd updateCd)
+        {
+            if (updateCd == null) return BadRequest();
+
+            _cdService.Update(updateCd);
+
+            return NoContent();
         }
     }
 }

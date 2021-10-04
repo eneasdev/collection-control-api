@@ -1,45 +1,44 @@
 ﻿using collection_control_api.Controllers;
 using collection_control_api.Entities;
-using collection_control_api.Models.InputModels;
 using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Moq;
 using Xunit;
 
 namespace collection_control_api.Tests
 {
     public class CreateTests
     {
-        private readonly ICdService _cdService;
-        public CreateTests(ICdService cdService)
-        {
-            _cdService = cdService;
-        }
 
         [Fact]
-        public void Create()
+        public void ValidCdObjectIsPassed_ExecuteCreate_CreateShouldReturnAOkResult()
         {
             // Arrange
-            var cdController = new CdsController(_cdService);
+            var cdServiceMock = new Mock<ICdService>();
+            var cdController = new CdsController(cdServiceMock.Object);
 
-            var newCd = new NewCdInputModel()
-            {
-                Title = "Hello",
-                Singer = "Adele",
-                Description = "Single",
-                ReleaseYear = "2005",
-                SongsNumber = 7
-            };
-
-            
+            var newCd = new Cd("Bicho Solto", "tazmania");
 
             // Act
-            var resultado = cdController.Create(newCd) as ObjectResult;
+            var resultado = cdController.Create(newCd) as OkResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 200);
+        }
+
+        [Fact]
+        public void NullIsPassed_ExecuteCreate_CreateShouldReturnBadRequestResult()
+        {
+            // Arrange
+            var cdServiceMock = new Mock<ICdService>();
+            var cdController = new CdsController(cdServiceMock.Object);
+
+            Cd newCd = null;
+            // Act
+            var resultado = cdController.Create(newCd) as BadRequestResult;
+
+            // Assert
+            Assert.True(resultado.StatusCode == 400);
         }
     }
 }
