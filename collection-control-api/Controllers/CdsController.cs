@@ -29,5 +29,14 @@ namespace collection_control_api.Controllers
 
             return NoContent();
         }
+
+        public IActionResult Delete(int id)
+        {
+            if (id < 1) return NotFound();
+
+            _cdService.Delete(id);
+
+            return NoContent();
+        }
     }
 }
