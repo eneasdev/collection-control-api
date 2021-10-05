@@ -7,19 +7,19 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace collection_control_api.Tests.ControllersTests.CdsTests
+namespace collection_control_api.Tests.ControllersTests.DvdsTests
 {
     public class GetByIdTests
     {
         [Fact]
-        public void ValidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnOkObjectResult()
+        public void ValidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnOkObjetcResult()
         {
             // Arrange
-            var cdServiceMock = new Mock<ICdService>();
-            var cdController = new CdsController(cdServiceMock.Object);
+            var dvdServiceMock = new Mock<IDvdService>();
+            var dvdController = new DvdsController(dvdServiceMock.Object);
             var id = 1;
             // Act
-            var resultado = cdController.GetById(id) as OkObjectResult;
+            var resultado = dvdController.GetById(id) as OkObjectResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 200);
@@ -29,11 +29,11 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
         public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnNotFoundResult()
         {
             // Arrange
-            var cdServiceMock = new Mock<ICdService>();
-            var cdController = new CdsController(cdServiceMock.Object);
+            var dvdServiceMock = new Mock<IDvdService>();
+            var dvdController = new DvdsController(dvdServiceMock.Object);
             var id = -1;
             // Act
-            var resultado = cdController.GetById(id) as NotFoundResult;
+            var resultado = dvdController.GetById(id) as NotFoundResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 404);
