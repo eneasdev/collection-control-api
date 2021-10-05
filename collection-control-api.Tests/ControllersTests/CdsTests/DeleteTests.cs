@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace collection_control_api.Tests.CdsTests
+namespace collection_control_api.Tests.ControllersTests.CdsTests
 {
     public class DeleteTests
     {

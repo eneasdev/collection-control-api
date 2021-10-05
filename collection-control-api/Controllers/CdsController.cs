@@ -12,6 +12,16 @@ namespace collection_control_api.Controllers
         {
             _cdService = cdService;
         }
+
+        public IActionResult GetById(int id)
+        {
+            if (id < 1) return NotFound();
+
+            var cd = _cdService.GetById(id);
+
+            return Ok(cd);
+        }
+
         public IActionResult Create([FromBody] Cd newCd)
         {
             if (newCd == null) return BadRequest();
