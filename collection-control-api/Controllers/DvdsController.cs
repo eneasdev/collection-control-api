@@ -1,4 +1,5 @@
-﻿using collection_control_api.Services;
+﻿using collection_control_api.Entities;
+using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,24 @@ namespace collection_control_api.Controllers
             var dvd = _dvdService.GetById(id);
 
             return Ok(dvd);
+        }
+
+        public IActionResult Create([FromBody] Dvd newDvd)
+        {
+            if (newDvd == null) return BadRequest();
+
+            _dvdService.Create(newDvd);
+
+            return Ok();
+        }
+
+        public IActionResult Update([FromBody] Dvd updateDvd)
+        {
+            if (updateDvd == null) return BadRequest();
+
+            _dvdService.Update(updateDvd);
+
+            return NoContent();
         }
     }
 }

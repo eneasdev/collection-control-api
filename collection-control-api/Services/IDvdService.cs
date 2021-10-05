@@ -9,5 +9,7 @@ namespace collection_control_api.Services
     public interface IDvdService
     {
         Dvd GetById(int id);
+        void Create(Dvd newDvd);
+        void Update(Dvd updateDvd);
     }
 }
