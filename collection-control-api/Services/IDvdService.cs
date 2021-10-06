@@ -11,5 +11,6 @@ namespace collection_control_api.Services
         Dvd GetById(int id);
         void Create(Dvd newDvd);
         void Update(Dvd updateDvd);
+        void Delete(int id);
     }
 }
