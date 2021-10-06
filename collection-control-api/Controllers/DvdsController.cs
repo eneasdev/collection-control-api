@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Controllers
 {
+    [Route("api/Dvds")]
     public class DvdsController : ControllerBase
     {
         private readonly IDvdService _dvdService;
