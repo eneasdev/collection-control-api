@@ -3,9 +3,6 @@ using collection_control_api.Entities;
 using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace collection_control_api.Tests.ControllersTests.DvdsTests
