@@ -36,5 +36,15 @@ namespace collection_control_api.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        public IActionResult Update([FromBody] Book updateBook)
+        {
+            if (updateBook == null) return BadRequest();
+
+            _bookService.Update(updateBook);
+
+            return NoContent();
+        }
     }
 }

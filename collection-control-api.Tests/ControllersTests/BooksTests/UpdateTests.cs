@@ -3,9 +3,12 @@ using collection_control_api.Entities;
 using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Xunit;
 
-namespace collection_control_api.Tests.ControllersTests.CdsTests
+namespace collection_control_api.Tests.ControllersTests.BooksTests
 {
     public class UpdateTests
     {
@@ -13,13 +16,13 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
         public void ValidObjectIsPassed_ExecuteUpdate_UpdateShouldReturnANoContentResult()
         {
             // Arrange
-            var cdServiceMock = new Mock<ICdService>();
-            var cdController = new CdsController(cdServiceMock.Object);
+            var bookServiceMock = new Mock<IBookService>();
+            var bookController = new BooksController(bookServiceMock.Object);
 
-            var updateCd = new Cd("Bicho Solto", "tazmania");
+            var updateBook = new Book ("CleanCode", "Tio Bob");
 
             // Act
-            var resultado = cdController.Update(updateCd) as NoContentResult;
+            var resultado = bookController.Update(updateBook) as NoContentResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 204);
@@ -29,13 +32,13 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
         public void NullIsPassed_ExecuteUpdate_UpdateShouldReturnBadRequestResult()
         {
             // Arrange
-            var cdServiceMock = new Mock<ICdService>();
-            var cdController = new CdsController(cdServiceMock.Object);
+            var bookServiceMock = new Mock<IBookService>();
+            var bookController = new BooksController(bookServiceMock.Object);
 
-            Cd updateCd = null;
+            Book updateBook = null;
 
             // Act
-            var resultado = cdController.Update(updateCd) as BadRequestResult;
+            var resultado = bookController.Update(updateBook) as BadRequestResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 400);
