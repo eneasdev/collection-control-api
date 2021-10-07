@@ -1,4 +1,5 @@
 ﻿using collection_control_api.Controllers;
+using collection_control_api.Entities;
 using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -9,36 +10,37 @@ using Xunit;
 
 namespace collection_control_api.Tests.ControllersTests.BooksTests
 {
-    public class GetByIdTests
+    public class CreateTests
     {
         [Fact]
-        public void ValidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnOkObjectResult()
+        public void ValidCdObjectIsPassed_ExecuteCreate_CreateShouldReturnAOkResult()
         {
             // Arrange
             var bookServiceMock = new Mock<IBookService>();
             var bookController = new BooksController(bookServiceMock.Object);
-            var id = 1;
+
+            var newBook = new Book("Clean Code", "Tio Bob");
 
             // Act
-            var resultado = bookController.GetById(id) as OkObjectResult;
+            var resultado = bookController.Create(newBook) as OkResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 200);
         }
 
         [Fact]
-        public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnNotFoundResult()
+        public void NullIsPassed_ExecuteCreate_CreateShouldReturnBadRequestResult()
         {
             // Arrange
             var bookServiceMock = new Mock<IBookService>();
             var bookController = new BooksController(bookServiceMock.Object);
-            var id = -1;
 
+            Book newBook = null;
             // Act
-            var resultado = bookController.GetById(id) as NotFoundResult;
+            var resultado = bookController.Create(newBook) as BadRequestResult;
 
             // Assert
-            Assert.True(resultado.StatusCode == 404);
+            Assert.True(resultado.StatusCode == 400);
         }
     }
 }

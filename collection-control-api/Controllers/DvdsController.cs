@@ -16,6 +16,7 @@ namespace collection_control_api.Controllers
         {
             _dvdService = dvdService;
         }
+        [HttpGet]
         public IActionResult GetById(int id)
         {
             if (id < 1) return NotFound();
@@ -25,6 +26,7 @@ namespace collection_control_api.Controllers
             return Ok(dvd);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] Dvd newDvd)
         {
             if (newDvd == null) return BadRequest();
@@ -34,6 +36,7 @@ namespace collection_control_api.Controllers
             return Ok();
         }
 
+        [HttpPut]
         public IActionResult Update([FromBody] Dvd updateDvd)
         {
             if (updateDvd == null) return BadRequest();
@@ -43,6 +46,7 @@ namespace collection_control_api.Controllers
             return NoContent();
         }
 
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             if (id < 1) return NotFound();

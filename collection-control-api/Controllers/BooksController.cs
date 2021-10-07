@@ -1,4 +1,5 @@
-﻿using collection_control_api.Services;
+﻿using collection_control_api.Entities;
+using collection_control_api.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace collection_control_api.Controllers
         {
             _bookService = bookService;
         }
+
+        [HttpGet]
         public IActionResult GetById(int id)
         {
             if (id < 1) return NotFound();
@@ -22,6 +25,16 @@ namespace collection_control_api.Controllers
             var book = _bookService.GetById(id);
 
             return Ok(book);
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] Book newBook)
+        {
+            if (newBook == null) return BadRequest();
+
+            _bookService.Create(newBook);
+
+            return Ok();
         }
     }
 }

@@ -9,5 +9,6 @@ namespace collection_control_api.Services
     public interface IBookService
     {
         Book GetById(int id);
+        void Create(Book newBook);
     }
 }
