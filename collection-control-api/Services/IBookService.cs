@@ -11,5 +11,6 @@ namespace collection_control_api.Services
         Book GetById(int id);
         void Create(Book newBook);
         void Update(Book updateBook);
+        void Delete(int id);
     }
 }

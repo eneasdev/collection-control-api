@@ -46,5 +46,15 @@ namespace collection_control_api.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            if (id < 0) return NotFound();
+
+            _bookService.Delete(id);
+
+            return NoContent();
+        }
     }
 }
