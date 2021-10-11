@@ -9,5 +9,7 @@ namespace collection_control_api.Services
     public interface IItemService
     {
         void Lend(Item item, Client client);
+        List<Item> GetAll();
+        List<Item> GetItemsSearch(string stringSearch);
     }
 }

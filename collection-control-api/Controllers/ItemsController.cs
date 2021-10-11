@@ -13,6 +13,23 @@ namespace collection_control_api.Controllers
             _itemService = itemService;
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var items = _itemService.GetAll();
+
+            return Ok(items);
+        }
+
+        public IActionResult GetItemSearch([FromBody] string stringSearch)
+        {
+            if (string.IsNullOrWhiteSpace(stringSearch)) return NotFound();
+
+            var items = _itemService.GetItemSearch(stringSearch);
+
+            return Ok(items);
+        }
+
         [HttpPost]
         public IActionResult Lend([FromBody] Item item,[FromHeader] Client client)
         {

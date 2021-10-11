@@ -9,5 +9,6 @@
 
         public int Id { get; set; }
         public string Nome { get; private set; }
+        public Loan Loan { get; private set; }
     }
 }
