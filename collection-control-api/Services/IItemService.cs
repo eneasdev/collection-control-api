@@ -10,6 +10,6 @@ namespace collection_control_api.Services
     {
         void Lend(Item item, Client client);
         List<Item> GetAll();
-        List<Item> GetItemsSearch(string stringSearch);
+        List<Item> GetItemSearch(string stringSearch);
     }
 }
