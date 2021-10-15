@@ -1,11 +1,8 @@
 ﻿using collection_control_api.Controllers;
 using collection_control_api.Entities;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace collection_control_api.Tests.ControllersTests.BooksTests
@@ -16,7 +13,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
         public void ValidObjectIsPassed_ExecuteUpdate_UpdateShouldReturnANoContentResult()
         {
             // Arrange
-            var bookServiceMock = new Mock<IBookService>();
+            var bookServiceMock = new Mock<IBookRepository>();
             var bookController = new BooksController(bookServiceMock.Object);
 
             var updateBook = new Book ("CleanCode", "Tio Bob");
@@ -32,7 +29,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
         public void NullIsPassed_ExecuteUpdate_UpdateShouldReturnBadRequestResult()
         {
             // Arrange
-            var bookServiceMock = new Mock<IBookService>();
+            var bookServiceMock = new Mock<IBookRepository>();
             var bookController = new BooksController(bookServiceMock.Object);
 
             Book updateBook = null;

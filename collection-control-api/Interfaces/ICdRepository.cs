@@ -1,8 +1,8 @@
 ﻿using collection_control_api.Entities;
 
-namespace collection_control_api.Services
+namespace collection_control_api.Interfaces
 {
-    public interface ICdService
+    public interface ICdRepository
     {
         Cd GetById(int id);
         void Create(Cd newCd);

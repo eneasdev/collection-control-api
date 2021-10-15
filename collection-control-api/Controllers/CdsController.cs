@@ -1,5 +1,5 @@
 ﻿using collection_control_api.Entities;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -7,8 +7,8 @@ namespace collection_control_api.Controllers
     [Route("api/Cds")]
     public class CdsController : ControllerBase
     {
-        private readonly ICdService _cdService;
-        public CdsController(ICdService cdService)
+        private readonly ICdRepository _cdService;
+        public CdsController(ICdRepository cdService)
         {
             _cdService = cdService;
         }

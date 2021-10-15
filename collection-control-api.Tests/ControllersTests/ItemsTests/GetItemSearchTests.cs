@@ -1,10 +1,7 @@
 ﻿using collection_control_api.Controllers;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace collection_control_api.Tests.ControllersTests.ItemsTests
@@ -15,7 +12,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void ValidaStringPassed_GetItemSearchExecuted_ShouldGetItemSearchReturnOkObjectResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<IItemService>();
+            var itemServiceMock = new Mock<IItemRepository>();
             var itemController = new ItemsController(itemServiceMock.Object);
 
             var searchString = "Foo";
@@ -31,7 +28,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void WhiteSpaceStringPassed_GetItemSearchExecuted_ShouldGetItemSearchReturnNotFoundResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<IItemService>();
+            var itemServiceMock = new Mock<IItemRepository>();
             var itemController = new ItemsController(itemServiceMock.Object);
 
             var searchString = "";
@@ -47,7 +44,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void NullStringPassed_GetItemSearchExecuted_ShouldGetItemSearchReturnNotFoundResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<IItemService>();
+            var itemServiceMock = new Mock<IItemRepository>();
             var itemController = new ItemsController(itemServiceMock.Object);
 
             string searchString = null;

@@ -1,10 +1,7 @@
 ﻿using collection_control_api.Controllers;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace collection_control_api.Tests.ControllersTests.DvdsTests
@@ -15,7 +12,7 @@ namespace collection_control_api.Tests.ControllersTests.DvdsTests
         public void ValidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnOkObjetcResult()
         {
             // Arrange
-            var dvdServiceMock = new Mock<IDvdService>();
+            var dvdServiceMock = new Mock<IDvdRepository>();
             var dvdController = new DvdsController(dvdServiceMock.Object);
             var id = 1;
             // Act
@@ -29,7 +26,7 @@ namespace collection_control_api.Tests.ControllersTests.DvdsTests
         public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnNotFoundResult()
         {
             // Arrange
-            var dvdServiceMock = new Mock<IDvdService>();
+            var dvdServiceMock = new Mock<IDvdRepository>();
             var dvdController = new DvdsController(dvdServiceMock.Object);
             var id = -1;
             // Act

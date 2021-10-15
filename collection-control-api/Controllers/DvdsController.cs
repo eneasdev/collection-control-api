@@ -1,18 +1,14 @@
 ﻿using collection_control_api.Entities;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace collection_control_api.Controllers
 {
     [Route("api/Dvds")]
     public class DvdsController : ControllerBase
     {
-        private readonly IDvdService _dvdService;
-        public DvdsController(IDvdService dvdService)
+        private readonly IDvdRepository _dvdService;
+        public DvdsController(IDvdRepository dvdService)
         {
             _dvdService = dvdService;
         }

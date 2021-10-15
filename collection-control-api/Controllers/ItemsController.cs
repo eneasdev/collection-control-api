@@ -1,5 +1,5 @@
 ﻿using collection_control_api.Entities;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -7,8 +7,8 @@ namespace collection_control_api.Controllers
     [Route("api/Items")]
     public class ItemsController : ControllerBase
     {
-        private readonly IItemService _itemService;
-        public ItemsController(IItemService itemService)
+        private readonly IItemRepository _itemService;
+        public ItemsController(IItemRepository itemService)
         {
             _itemService = itemService;
         }

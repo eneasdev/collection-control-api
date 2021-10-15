@@ -1,18 +1,14 @@
 ﻿using collection_control_api.Entities;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace collection_control_api.Controllers
 {
     [Route("api/Books")]
     public class BooksController : ControllerBase
     {
-        private readonly IBookService _bookService;
-        public BooksController(IBookService bookService)
+        private readonly IBookRepository _bookService;
+        public BooksController(IBookRepository bookService)
         {
             _bookService = bookService;
         }

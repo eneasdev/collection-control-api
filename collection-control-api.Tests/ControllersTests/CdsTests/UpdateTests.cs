@@ -1,6 +1,6 @@
 ﻿using collection_control_api.Controllers;
 using collection_control_api.Entities;
-using collection_control_api.Services;
+using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -13,7 +13,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
         public void ValidObjectIsPassed_ExecuteUpdate_UpdateShouldReturnANoContentResult()
         {
             // Arrange
-            var cdServiceMock = new Mock<ICdService>();
+            var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
             var updateCd = new Cd("Bicho Solto", "tazmania");
@@ -29,7 +29,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
         public void NullIsPassed_ExecuteUpdate_UpdateShouldReturnBadRequestResult()
         {
             // Arrange
-            var cdServiceMock = new Mock<ICdService>();
+            var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
             Cd updateCd = null;
