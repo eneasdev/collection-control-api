@@ -7,6 +7,7 @@ namespace collection_control_api.Entities
 {
     public class Book : Item
     {
+        public Book() { }
         public Book(string title, string author)
         {
             Title = title;

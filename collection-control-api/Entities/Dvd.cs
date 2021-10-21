@@ -7,6 +7,7 @@ namespace collection_control_api.Entities
 {
     public class Dvd : Item
     {
+        public Dvd() { }
         public Dvd(string title, string staring)
         {
             Title = title;

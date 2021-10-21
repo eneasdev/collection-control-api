@@ -23,8 +23,8 @@ namespace collection_control_api
         {
             services.AddControllers();
 
-            var connection = Configuration["ConexaoSqlServer:SqlServerConnectionString"];
-            services.AddDbContext<CollectionContext>(options => options.UseSqlServer(connection));
+            var connectionString = Configuration.GetConnectionString("ColletionString");
+            services.AddDbContext<CollectionContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<ICdRepository, CdRepository>();

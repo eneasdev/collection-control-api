@@ -2,6 +2,7 @@
 {
     public class Cd : Item
     {
+        public Cd() { }
         public Cd(string title, string singer)
         {
             Title = title;

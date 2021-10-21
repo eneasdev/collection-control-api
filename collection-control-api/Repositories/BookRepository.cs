@@ -9,24 +9,38 @@ namespace collection_control_api.Repositories
 {
     public class BookRepository : IBookRepository
     {
+        private readonly CollectionContext _colletionContext;
+        public BookRepository(CollectionContext collectionContext)
+        {
+            _colletionContext = collectionContext;
+        }
+
         public void Create(Book newBook)
         {
-            throw new NotImplementedException();
+            _colletionContext.books.Add(newBook);
+
+            _colletionContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var book = _colletionContext.books.FirstOrDefault(b => b.Id == id);
+
+            _colletionContext.books.Remove(book);
+
+            _colletionContext.SaveChanges();
         }
 
         public Book GetById(int id)
         {
-            throw new NotImplementedException();
+            return _colletionContext.books.FirstOrDefault(b => b.Id == id);
         }
 
         public void Update(Book updateBook)
         {
-            throw new NotImplementedException();
+            _colletionContext.books.Update(updateBook);
+
+            _colletionContext.SaveChanges();
         }
     }
 }
