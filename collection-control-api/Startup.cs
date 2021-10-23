@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using collection_control_api.Interfaces;
 using collection_control_api.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace collection_control_api
 {
@@ -30,6 +31,11 @@ namespace collection_control_api
             services.AddScoped<ICdRepository, CdRepository>();
             services.AddScoped<IDvdRepository, DvdRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "collection_control_api", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +44,8 @@ namespace collection_control_api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "collection_control_api"));
             }
 
             app.UseHttpsRedirection();

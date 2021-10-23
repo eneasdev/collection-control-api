@@ -10,7 +10,6 @@ namespace collection_control_api.Tests.RepositoriesTests.BooksTests
         [Fact]
         public void primeiroTeste_Executa_DeveriaHaverLago()
         {
-            var book
         }
     }
 }
