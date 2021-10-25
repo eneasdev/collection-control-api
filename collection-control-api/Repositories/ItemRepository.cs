@@ -9,6 +9,12 @@ namespace collection_control_api.Repositories
 {
     public class ItemRepository : IItemRepository
     {
+        private readonly CollectionContext _collectionContext;
+        public ItemRepository(CollectionContext collectionContext)
+        {
+            _collectionContext = collectionContext;
+        }
+
         public List<Item> GetAll()
         {
             throw new NotImplementedException();

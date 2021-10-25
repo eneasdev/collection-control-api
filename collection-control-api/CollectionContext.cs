@@ -12,6 +12,7 @@ namespace collection_control_api
     {
         public CollectionContext(DbContextOptions<CollectionContext> options) : base(options) { }
 
+        public DbSet<Item> items { get; set; }
         public DbSet<Dvd> dvds { get; set; }
         public DbSet<Cd> cds { get; set; }
         public DbSet<Book> books { get; set; }

@@ -1,5 +1,8 @@
-﻿namespace collection_control_api.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace collection_control_api.Entities
 {
+    [Table("cds")]
     public class Cd : Item
     {
         public Cd() { }
@@ -7,8 +10,6 @@
         {
             Title = title;
             Singer = singer;
-
-            ItemType = Type.Cd;
         }
 
         public string Singer { get; private set; }

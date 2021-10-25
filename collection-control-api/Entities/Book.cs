@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace collection_control_api.Entities
 {
+    [Table("books")]
     public class Book : Item
     {
         public Book() { }
@@ -12,8 +14,6 @@ namespace collection_control_api.Entities
         {
             Title = title;
             Author = author;
-
-            ItemType = Type.Book;
         }
         public string Author { get; private set; }
         public int PagesNumber { get; private set; }

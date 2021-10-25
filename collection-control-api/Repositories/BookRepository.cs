@@ -11,10 +11,10 @@ namespace collection_control_api.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private readonly CollectionContext _colletionContext;
+        private readonly CollectionContext _collectionContext;
         public BookRepository(CollectionContext collectionContext)
         {
-            _colletionContext = collectionContext;
+            _collectionContext = collectionContext;
         }
 
         public void Create(NewBookInputModel newBookInputModel)
@@ -25,24 +25,24 @@ namespace collection_control_api.Repositories
                 ReleasedYear = newBookInputModel.ReleasedYear
             };
 
-            _colletionContext.books.Add(newBook);
+            _collectionContext.books.Add(newBook);
 
-            _colletionContext.SaveChanges();
+            _collectionContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var book = _colletionContext.books
+            var book = _collectionContext.books
                 .FirstOrDefault(b => b.Id == id);
 
-            _colletionContext.books.Remove(book);
+            _collectionContext.items.Remove(book);
 
-            _colletionContext.SaveChanges();
+            _collectionContext.SaveChanges();
         }
 
         public Book GetById(int id)
         {
-            var goted = _colletionContext.books
+            var goted = _collectionContext.books
                 .FirstOrDefault(b => b.Id == id);
             return goted;
         }
@@ -57,9 +57,9 @@ namespace collection_control_api.Repositories
             getBook.AddAuthor(updateBook.Author);
             getBook.AddPagesNumber(updateBook.PagesNumber);
 
-            _colletionContext.books.Update(getBook);
+            _collectionContext.books.Update(getBook);
 
-            _colletionContext.SaveChanges();
+            _collectionContext.SaveChanges();
         }
     }
 }
