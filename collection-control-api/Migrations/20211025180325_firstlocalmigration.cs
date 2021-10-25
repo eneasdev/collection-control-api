@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace collection_control_api.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class firstlocalmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,29 @@ namespace collection_control_api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleasedYear = table.Column<int>(type: "int", nullable: false),
+                    ItemType = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PagesNumber = table.Column<int>(type: "int", nullable: true),
+                    Singer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SongsNumber = table.Column<int>(type: "int", nullable: true),
+                    Staring = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Duration = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,37 +65,32 @@ namespace collection_control_api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "items",
+                name: "ItemLoan",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReleaseYear = table.Column<int>(type: "int", nullable: false),
-                    LoanId = table.Column<int>(type: "int", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PagesNumber = table.Column<int>(type: "int", nullable: true),
-                    Singer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SongsNumber = table.Column<int>(type: "int", nullable: true),
-                    Staring = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<int>(type: "int", nullable: true)
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    LoanId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_items", x => x.Id);
+                    table.PrimaryKey("PK_ItemLoan", x => new { x.ItemId, x.LoanId });
                     table.ForeignKey(
-                        name: "FK_items_loans_LoanId",
+                        name: "FK_ItemLoan_Item_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Item",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemLoan_loans_LoanId",
                         column: x => x.LoanId,
                         principalTable: "loans",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_items_LoanId",
-                table: "items",
+                name: "IX_ItemLoan_LoanId",
+                table: "ItemLoan",
                 column: "LoanId");
 
             migrationBuilder.CreateIndex(
@@ -84,7 +102,10 @@ namespace collection_control_api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "items");
+                name: "ItemLoan");
+
+            migrationBuilder.DropTable(
+                name: "Item");
 
             migrationBuilder.DropTable(
                 name: "loans");

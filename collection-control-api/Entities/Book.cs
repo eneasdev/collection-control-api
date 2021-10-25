@@ -12,8 +12,19 @@ namespace collection_control_api.Entities
         {
             Title = title;
             Author = author;
+
+            ItemType = Type.Book;
         }
         public string Author { get; private set; }
         public int PagesNumber { get; private set; }
+
+        public void AddAuthor(string author)
+        {
+            Author = author;
+        }
+        public void AddPagesNumber(int pagesNumber)
+        {
+            PagesNumber = pagesNumber;
+        }
     }
 }

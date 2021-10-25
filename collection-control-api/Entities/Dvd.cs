@@ -12,6 +12,8 @@ namespace collection_control_api.Entities
         {
             Title = title;
             Staring = staring;
+
+            ItemType = Type.Dvd;
         }
         public string Staring { get; private set; }
         public int Duration { get; private set; }

@@ -1,6 +1,7 @@
 ﻿using collection_control_api.Controllers;
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -16,7 +17,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             var bookServiceMock = new Mock<IBookRepository>();
             var bookController = new BooksController(bookServiceMock.Object);
 
-            var newBook = new Book("Clean Code", "Tio Bob");
+            var newBook = new NewBookInputModel();
 
             // Act
             var resultado = bookController.Create(newBook) as OkResult;
@@ -32,7 +33,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             var bookServiceMock = new Mock<IBookRepository>();
             var bookController = new BooksController(bookServiceMock.Object);
 
-            Book newBook = null;
+            NewBookInputModel newBook = null;
             // Act
             var resultado = bookController.Create(newBook) as BadRequestResult;
 

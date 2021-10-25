@@ -7,6 +7,8 @@
         {
             Title = title;
             Singer = singer;
+
+            ItemType = Type.Cd;
         }
 
         public string Singer { get; private set; }

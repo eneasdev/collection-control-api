@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -7,10 +8,10 @@ namespace collection_control_api.Controllers
     [Route("api/Books")]
     public class BooksController : ControllerBase
     {
-        private readonly IBookRepository _bookService;
-        public BooksController(IBookRepository bookService)
+        private readonly IBookRepository _bookRepository;
+        public BooksController(IBookRepository bookRepository)
         {
-            _bookService = bookService;
+            _bookRepository = bookRepository;
         }
 
         [HttpGet]
@@ -18,37 +19,37 @@ namespace collection_control_api.Controllers
         {
             if (id < 1) return NotFound();
 
-            var book = _bookService.GetById(id);
+            var book = _bookRepository.GetById(id);
 
             return Ok(book);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Book newBook)
+        public IActionResult Create([FromBody] NewBookInputModel newBookInputModel)
         {
-            if (newBook == null) return BadRequest();
+            if (newBookInputModel == null) return BadRequest();
 
-            _bookService.Create(newBook);
+            _bookRepository.Create(newBookInputModel);
 
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult Update([FromBody] Book updateBook)
         {
             if (updateBook == null) return BadRequest();
 
-            _bookService.Update(updateBook);
+            _bookRepository.Update(updateBook);
 
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             if (id < 0) return NotFound();
 
-            _bookService.Delete(id);
+            _bookRepository.Delete(id);
 
             return NoContent();
         }

@@ -19,6 +19,21 @@ namespace collection_control_api.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ItemLoan", b =>
+                {
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LoanId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemId", "LoanId");
+
+                    b.HasIndex("LoanId");
+
+                    b.ToTable("ItemLoan");
+                });
+
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
@@ -48,10 +63,10 @@ namespace collection_control_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LoanId")
+                    b.Property<int>("ItemType")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReleaseYear")
+                    b.Property<int>("ReleasedYear")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -59,9 +74,7 @@ namespace collection_control_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LoanId");
-
-                    b.ToTable("items");
+                    b.ToTable("Item");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Item");
                 });
@@ -128,13 +141,19 @@ namespace collection_control_api.Migrations
                     b.HasDiscriminator().HasValue("Dvd");
                 });
 
-            modelBuilder.Entity("collection_control_api.Entities.Item", b =>
+            modelBuilder.Entity("ItemLoan", b =>
                 {
-                    b.HasOne("collection_control_api.Entities.Loan", "Loan")
-                        .WithMany("Item")
-                        .HasForeignKey("LoanId");
+                    b.HasOne("collection_control_api.Entities.Item", null)
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Loan");
+                    b.HasOne("collection_control_api.Entities.Loan", null)
+                        .WithMany()
+                        .HasForeignKey("LoanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Loan", b =>
@@ -149,11 +168,6 @@ namespace collection_control_api.Migrations
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>
                 {
                     b.Navigation("Loan");
-                });
-
-            modelBuilder.Entity("collection_control_api.Entities.Loan", b =>
-                {
-                    b.Navigation("Item");
                 });
 #pragma warning restore 612, 618
         }

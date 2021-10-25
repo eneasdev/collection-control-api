@@ -13,15 +13,15 @@ namespace collection_control_api.Controllers
             _itemService = itemService;
         }
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //   var items = _itemService.GetAll();
-        //
-        //    return Ok(items);
-        //}
-
         [HttpGet]
+        public IActionResult GetAll()
+        {
+            var items = _itemService.GetAll();
+
+            return Ok(items);
+        }
+
+        [HttpGet("{string}")]
         public IActionResult GetItemSearch(string stringSearch)
         {
             if (string.IsNullOrWhiteSpace(stringSearch)) return NotFound();
