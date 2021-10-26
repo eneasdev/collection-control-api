@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace collection_control_api.Entities
 {
-    [Table("items")]
     public abstract class Item
     {
         public int Id { get; set; }

@@ -17,12 +17,12 @@ namespace collection_control_api.Repositories
             _collectionContext = collectionContext;
         }
 
-        public void Create(NewBookInputModel newBookInputModel)
+        public void Create(NewBookInputModel inputModel)
         {
-            var newBook = new Book(newBookInputModel.Title, newBookInputModel.Author)
+            var newBook = new Book(inputModel.Title, inputModel.Author, inputModel.PagesNumber)
             {
-                Description = newBookInputModel.Description,
-                ReleasedYear = newBookInputModel.ReleasedYear
+                Description = inputModel.Description,
+                ReleasedYear = inputModel.ReleasedYear
             };
 
             _collectionContext.books.Add(newBook);
@@ -43,21 +43,18 @@ namespace collection_control_api.Repositories
         public Book GetById(int id)
         {
             var goted = _collectionContext.books
+                .OfType<Book>()
                 .FirstOrDefault(b => b.Id == id);
             return goted;
         }
 
-        public void Update(Book updateBook)
+        public void Update(UpdateBookInputModel inputModel)
         {
-            var getBook = GetById(updateBook.Id);
+            var updateBook = GetById(inputModel.Id);
 
-            getBook.Title = updateBook.Title;
-            getBook.Description = updateBook.Description;
-            getBook.ReleasedYear = updateBook.ReleasedYear;
-            getBook.AddAuthor(updateBook.Author);
-            getBook.AddPagesNumber(updateBook.PagesNumber);
+            updateBook.Description = inputModel.Description;
 
-            _collectionContext.books.Update(getBook);
+            _collectionContext.books.Update(updateBook);
 
             _collectionContext.SaveChanges();
         }

@@ -14,12 +14,14 @@ namespace collection_control_api.Controllers
             _bookRepository = bookRepository;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             if (id < 1) return NotFound();
 
             var book = _bookRepository.GetById(id);
+
+            if (book == null) return NotFound();
 
             return Ok(book);
         }
@@ -35,11 +37,11 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] Book updateBook)
+        public IActionResult Update(int id, UpdateBookInputModel inputModel)
         {
-            if (updateBook == null) return BadRequest();
+            if (inputModel == null) return BadRequest();
 
-            _bookRepository.Update(updateBook);
+            _bookRepository.Update(inputModel);
 
             return NoContent();
         }

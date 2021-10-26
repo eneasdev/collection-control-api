@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Models.InputModels
 {
-    public class NewBookInputModel
+    public class UpdateBookInputModel
     {
-        public string Title { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
-        public int ReleasedYear { get; set; }
-        public string Author { get; set; }
-        public int PagesNumber { get; set; }
     }
 }

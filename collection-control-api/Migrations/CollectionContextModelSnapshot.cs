@@ -59,6 +59,10 @@ namespace collection_control_api.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ReleasedYear")
                         .HasColumnType("int");
 
@@ -68,6 +72,8 @@ namespace collection_control_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("items");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Item");
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Loan", b =>
@@ -103,7 +109,7 @@ namespace collection_control_api.Migrations
                     b.Property<int>("PagesNumber")
                         .HasColumnType("int");
 
-                    b.ToTable("books");
+                    b.HasDiscriminator().HasValue("Book");
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Cd", b =>
@@ -116,7 +122,7 @@ namespace collection_control_api.Migrations
                     b.Property<int>("SongsNumber")
                         .HasColumnType("int");
 
-                    b.ToTable("cds");
+                    b.HasDiscriminator().HasValue("Cd");
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Dvd", b =>
@@ -129,7 +135,7 @@ namespace collection_control_api.Migrations
                     b.Property<string>("Staring")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("dvds");
+                    b.HasDiscriminator().HasValue("Dvd");
                 });
 
             modelBuilder.Entity("ItemLoan", b =>
@@ -154,33 +160,6 @@ namespace collection_control_api.Migrations
                         .HasForeignKey("ClientId");
 
                     b.Navigation("Client");
-                });
-
-            modelBuilder.Entity("collection_control_api.Entities.Book", b =>
-                {
-                    b.HasOne("collection_control_api.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("collection_control_api.Entities.Book", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("collection_control_api.Entities.Cd", b =>
-                {
-                    b.HasOne("collection_control_api.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("collection_control_api.Entities.Cd", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("collection_control_api.Entities.Dvd", b =>
-                {
-                    b.HasOne("collection_control_api.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("collection_control_api.Entities.Dvd", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Entities
 {
-    [Table("dvds")]
     public class Dvd : Item
     {
         public Dvd() { }

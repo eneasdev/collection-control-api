@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Entities
 {
-    [Table("books")]
     public class Book : Item
     {
         public Book() { }
-        public Book(string title, string author)
+        public Book(string title, string author, int pagesNumber)
         {
             Title = title;
-            Author = author;
+            AddAuthor(author);
+            AddPagesNumber(pagesNumber);
         }
         public string Author { get; private set; }
         public int PagesNumber { get; private set; }

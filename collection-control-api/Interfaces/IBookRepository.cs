@@ -6,8 +6,8 @@ namespace collection_control_api.Interfaces
     public interface IBookRepository
     {
         Book GetById(int id);
-        void Create(NewBookInputModel newBook);
-        void Update(Book updateBook);
+        void Create(NewBookInputModel inputModel);
+        void Update(UpdateBookInputModel inputModel);
         void Delete(int id);
     }
 }

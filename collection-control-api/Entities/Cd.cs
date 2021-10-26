@@ -2,7 +2,6 @@
 
 namespace collection_control_api.Entities
 {
-    [Table("cds")]
     public class Cd : Item
     {
         public Cd() { }
