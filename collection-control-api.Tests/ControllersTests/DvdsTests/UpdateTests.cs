@@ -16,7 +16,7 @@ namespace collection_control_api.Tests.ControllersTests.DvdsTests
             var dvdServiceMock = new Mock<IDvdRepository>();
             var dvdController = new DvdsController(dvdServiceMock.Object);
 
-            var updateDvd = new Dvd("Rei leão", "Simba");
+            var updateDvd = new Dvd("Rei leão", "Simba", 120);
 
             // Act
             var resultado = dvdController.Update(updateDvd) as NoContentResult;

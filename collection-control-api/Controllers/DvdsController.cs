@@ -15,9 +15,11 @@ namespace collection_control_api.Controllers
         [HttpGet]
         public IActionResult GetById(int id)
         {
-            if (id < 1) return NotFound();
+            if (id < 1) return BadRequest();
 
             var dvd = _dvdService.GetById(id);
+
+            if (dvd == null) return NotFound();
 
             return Ok(dvd);
         }

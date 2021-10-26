@@ -31,7 +31,7 @@ namespace collection_control_api.Repositories
         {
             var cd = GetById(id);
 
-            _collectionContext.items
+            _collectionContext.cds
                 .Remove(cd);
 
             _collectionContext.SaveChanges();
@@ -46,11 +46,11 @@ namespace collection_control_api.Repositories
             return cd;
         }
 
-        public void Update(Cd inputModel)
+        public void Update(Cd inputCd)
         {
-            var updateCd = GetById(inputModel.Id);
+            var updateCd = GetById(inputCd.Id);
 
-            updateCd.Description = inputModel.Description;
+            updateCd.Description = inputCd.Description;
 
             _collectionContext.cds.Update(updateCd);
 

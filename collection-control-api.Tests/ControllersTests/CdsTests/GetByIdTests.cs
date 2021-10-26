@@ -30,7 +30,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
         }
 
         [Fact]
-        public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnNotFoundResult()
+        public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnBadRequestResult()
         {
             // Arrange
             var cdServiceMock = new Mock<ICdRepository>();
@@ -39,10 +39,10 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             var id = -1;
 
             // Act
-            var resultado = cdController.GetById(id) as NotFoundResult;
+            var resultado = cdController.GetById(id) as BadRequestResult;
 
             // Assert
-            Assert.True(resultado.StatusCode == 404);
+            Assert.True(resultado.StatusCode == 400);
         }
 
         [Fact]

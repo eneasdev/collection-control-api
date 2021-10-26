@@ -30,7 +30,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
         }
 
         [Fact]
-        public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnNotFoundResult()
+        public void InvalidIdIsPassed_GetByIdExecuted_GetByIdShouldReturnBadRequestResult()
         {
             // Arrange
             var bookServiceMock = new Mock<IBookRepository>();
@@ -38,10 +38,10 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             var id = -1;
 
             // Act
-            var resultado = bookController.GetById(id) as NotFoundResult;
+            var resultado = bookController.GetById(id) as BadRequestResult;
 
             // Assert
-            Assert.True(resultado.StatusCode == 404);
+            Assert.True(resultado.StatusCode == 400);
         }
 
         [Fact]

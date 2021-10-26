@@ -9,24 +9,52 @@ namespace collection_control_api.Repositories
 {
     public class DvdRepository : IDvdRepository
     {
-        public void Create(Dvd newDvd)
+        private readonly CollectionContext _collectionContext;
+        public DvdRepository(CollectionContext collectionContext)
         {
-            throw new NotImplementedException();
+            _collectionContext = collectionContext;
+        }
+        public void Create(Dvd inputDvd)
+        {
+            var newDvd = new Dvd("Tubarão", "Van Damme", 138)
+            {
+                Description = inputDvd.Description,
+                ReleasedYear = inputDvd.ReleasedYear
+            };
+
+            _collectionContext.dvds.Add(newDvd);
+
+            _collectionContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var dvd = GetById(id);
+
+            _collectionContext.dvds
+                .Remove(dvd);
+
+            _collectionContext.SaveChanges();
         }
 
         public Dvd GetById(int id)
         {
-            throw new NotImplementedException();
+            var dvd = _collectionContext.dvds
+                //.OfType<Dvd>()
+                .FirstOrDefault(d => d.Id == id);
+
+            return dvd;
         }
 
-        public void Update(Dvd updateDvd)
+        public void Update(Dvd inputDvd)
         {
-            throw new NotImplementedException();
+            var updateDvd = GetById(inputDvd.Id);
+
+            updateDvd.Description = inputDvd.Description;
+
+            _collectionContext.dvds.Update(updateDvd);
+
+            _collectionContext.SaveChanges();
         }
     }
 }

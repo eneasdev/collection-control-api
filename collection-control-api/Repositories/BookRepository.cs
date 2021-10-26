@@ -35,7 +35,7 @@ namespace collection_control_api.Repositories
             var book = _collectionContext.books
                 .FirstOrDefault(b => b.Id == id);
 
-            _collectionContext.items
+            _collectionContext.books
                 .Remove(book);
 
             _collectionContext.SaveChanges();

@@ -16,7 +16,7 @@ namespace collection_control_api.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            if (id < 1) return NotFound();
+            if (id < 1) return BadRequest();
 
             var cd = _cdService.GetById(id);
 
