@@ -9,24 +9,52 @@ namespace collection_control_api.Repositories
 {
     public class CdRepository : ICdRepository
     {
-        public void Create(Cd newCd)
+        private readonly CollectionContext _collectionContext;
+        public CdRepository(CollectionContext collectionContext)
         {
-            throw new NotImplementedException();
+            _collectionContext = collectionContext;
+        }
+        public void Create(Cd inputCd)
+        {
+            var newCd = new Cd("Barões da pisadinha", "Um cara ai", 5)
+            {
+                Description = inputCd.Description,
+                ReleasedYear = inputCd.ReleasedYear
+            };
+
+            _collectionContext.cds.Add(newCd);
+
+            _collectionContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var cd = GetById(id);
+
+            _collectionContext.items
+                .Remove(cd);
+
+            _collectionContext.SaveChanges();
         }
 
         public Cd GetById(int id)
         {
-            throw new NotImplementedException();
+            var cd = _collectionContext.cds
+                //.OfType<Cd>()
+                .FirstOrDefault(c => c.Id == id);
+
+            return cd;
         }
 
-        public void Update(Cd updateCd)
+        public void Update(Cd inputModel)
         {
-            throw new NotImplementedException();
+            var updateCd = GetById(inputModel.Id);
+
+            updateCd.Description = inputModel.Description;
+
+            _collectionContext.cds.Update(updateCd);
+
+            _collectionContext.SaveChanges();
         }
     }
 }

@@ -16,10 +16,12 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
-            var updateCd = new Cd("Bicho Solto", "tazmania");
+            var id = 1;
+
+            var updateCd = new Cd("Bicho Solto", "tazmania", 5);
 
             // Act
-            var resultado = cdController.Update(updateCd) as NoContentResult;
+            var resultado = cdController.Update(id, updateCd) as NoContentResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 204);
@@ -32,10 +34,12 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
+            var id = 1;
+
             Cd updateCd = null;
 
             // Act
-            var resultado = cdController.Update(updateCd) as BadRequestResult;
+            var resultado = cdController.Update(id, updateCd) as BadRequestResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 400);

@@ -1,4 +1,5 @@
 ﻿using collection_control_api.Controllers;
+using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -14,7 +15,13 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             // Arrange
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
+
             var id = 1;
+
+            var cd = new Cd("Adelle", "Hello", 6);
+
+            cdServiceMock.Setup(c => c.GetById(id)).Returns(cd);
+
             // Act
             var resultado = cdController.GetById(id) as OkObjectResult;
 
@@ -28,7 +35,29 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             // Arrange
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
+
             var id = -1;
+
+            // Act
+            var resultado = cdController.GetById(id) as NotFoundResult;
+
+            // Assert
+            Assert.True(resultado.StatusCode == 404);
+        }
+
+        [Fact]
+        public void ValidIdIsPassedButCdDoesNotExist_GetByIdExecuted_GetByIdShouldReturnOkObjectResult()
+        {
+            // Arrange
+            var cdServiceMock = new Mock<ICdRepository>();
+            var cdController = new CdsController(cdServiceMock.Object);
+
+            var id = 1;
+
+            Cd cd = null;
+
+            cdServiceMock.Setup(c => c.GetById(id)).Returns(cd);
+
             // Act
             var resultado = cdController.GetById(id) as NotFoundResult;
 

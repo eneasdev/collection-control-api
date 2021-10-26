@@ -17,7 +17,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
-            var newCd = new Cd("Bicho Solto", "tazmania");
+            var newCd = new Cd("Bicho Solto", "tazmania", 5);
 
             // Act
             var resultado = cdController.Create(newCd) as OkResult;

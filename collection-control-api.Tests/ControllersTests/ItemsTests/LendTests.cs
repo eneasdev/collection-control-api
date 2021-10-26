@@ -16,7 +16,8 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
             var itemServiceMock = new Mock<IItemRepository>();
             var itemController = new ItemsController(itemServiceMock.Object);
 
-            var cd = new Cd("Foo Fighters", "David");
+            var cd = new Cd("Foo Fighters", "David", 7);
+
             var client = new Client("Joao");
 
             // Act
@@ -50,7 +51,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
             var itemServiceMock = new Mock<IItemRepository>();
             var itemController = new ItemsController(itemServiceMock.Object);
 
-            var cd = new Cd("Foo Fighters", "David");
+            var cd = new Cd("Foo Fighters", "David", 7);
             Client client = null;
 
             // Act

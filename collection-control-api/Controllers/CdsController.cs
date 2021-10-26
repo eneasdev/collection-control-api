@@ -13,18 +13,20 @@ namespace collection_control_api.Controllers
             _cdService = cdService;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             if (id < 1) return NotFound();
 
             var cd = _cdService.GetById(id);
 
+            if (cd == null) return NotFound();
+
             return Ok(cd);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Cd newCd)
+        public IActionResult Create(Cd newCd)
         {
             if (newCd == null) return BadRequest();
 
@@ -33,8 +35,8 @@ namespace collection_control_api.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] Cd updateCd)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Cd updateCd)
         {
             if (updateCd == null) return BadRequest();
 
@@ -43,7 +45,7 @@ namespace collection_control_api.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             if (id < 1) return NotFound();
