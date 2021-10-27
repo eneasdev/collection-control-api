@@ -13,13 +13,13 @@ namespace collection_control_api.Controllers
             _itemService = itemService;
         }
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var items = _itemService.GetAll();
-        //
-        //    return Ok(items);
-        //}
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var items = _itemService.GetAll();
+        
+            return Ok(items);
+        }
 
         [HttpGet("{string}")]
         public IActionResult GetItemSearch(string stringSearch)
@@ -32,7 +32,7 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Lend(Item item, Client client)
+        public IActionResult Lend([FromBody] Item item, [FromBody] Client client)
         {
             if (item == null || client == null) return BadRequest();
 

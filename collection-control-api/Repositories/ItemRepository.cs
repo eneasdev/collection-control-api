@@ -29,9 +29,17 @@ namespace collection_control_api.Repositories
                 .ToList();
         }
 
+        public Item GetById(int id)
+        {
+            return _collectionContext.items.FirstOrDefault(i => i.Id == id);
+        }
+
         public void Lend(Item item, Client client)
         {
-            throw new NotImplementedException();
+            var clientLend = GetById(client.Id);
+
+            var itemLend = GetById(item.Id);
+
         }
     }
 }
