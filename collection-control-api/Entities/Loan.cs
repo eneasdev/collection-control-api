@@ -6,10 +6,10 @@ namespace collection_control_api.Entities
     public class Loan
     {
         public Loan() { }
-        public Loan(List<Item> item, Client client)
+        public Loan(Item item, Client client)
         {
-            Item = item;
-            Client = client;
+            AddItem(item);
+            AddClient(client);
 
             CreatedAt = DateTime.Now;
         }
@@ -20,5 +20,19 @@ namespace collection_control_api.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime FinishedAt { get; private set; }
 
+        public void AddItem(Item item)
+        {
+            Item.Add(item);
+        }
+
+        public void AddClient(Client client)
+        {
+            Client = client;
+        }
+
+        public void Finish()
+        {
+            FinishedAt = DateTime.Now;
+        }
     }
 }

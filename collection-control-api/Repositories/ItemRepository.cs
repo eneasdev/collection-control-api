@@ -14,6 +14,7 @@ namespace collection_control_api.Repositories
         public ItemRepository(CollectionContext collectionContext)
         {
             _collectionContext = collectionContext;
+
         }
 
         public List<Item> GetAll()
@@ -29,17 +30,26 @@ namespace collection_control_api.Repositories
                 .ToList();
         }
 
-        public Item GetById(int id)
+        public void Lend(Item item, Client client)
+        {
+            var clientLend = GetClientById(client.Id);
+
+            var itemLend = GetItemById(item.Id);
+
+            var newLoan = new Loan();
+
+            _collectionContext.loans.Add()
+
+        }
+
+        public Item GetItemById(int id)
         {
             return _collectionContext.items.FirstOrDefault(i => i.Id == id);
         }
 
-        public void Lend(Item item, Client client)
+        public Client GetClientById(int id)
         {
-            var clientLend = GetById(client.Id);
-
-            var itemLend = GetById(item.Id);
-
+            return _collectionContext.clients.FirstOrDefault(c => c.Id == id);
         }
     }
 }
