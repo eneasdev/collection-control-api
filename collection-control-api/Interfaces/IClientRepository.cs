@@ -9,6 +9,6 @@ namespace collection_control_api.Interfaces
     public interface IClientRepository
     {
         Client GetById(int id);
-        void Create(Client inputClient);
+        void Create(string inputClientName);
     }
 }

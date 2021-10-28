@@ -15,9 +15,9 @@ namespace collection_control_api.Repositories
             _collectionContext = collectionContext;
         }
 
-        public void Create(Client inputClient)
+        public void Create(string inputClient)
         {
-            var newClient = new Client(inputClient.Name);
+            var newClient = new Client(inputClient);
 
             _collectionContext.clients.Add(newClient);
 

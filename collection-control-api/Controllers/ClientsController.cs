@@ -30,11 +30,11 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Client client)
+        public IActionResult Create([FromBody] string clientName)
         {
-            if (client == null) return BadRequest();
+            if (string.IsNullOrEmpty(clientName)) return BadRequest();
 
-            _clientRepository.Create(client);
+            _clientRepository.Create(clientName);
 
             return Ok();
         }

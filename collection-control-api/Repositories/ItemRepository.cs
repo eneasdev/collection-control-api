@@ -38,7 +38,7 @@ namespace collection_control_api.Repositories
 
             var newLoan = new Loan();
 
-            _collectionContext.loans.Add()
+            _collectionContext.loans.Add(newLoan);
 
         }
 

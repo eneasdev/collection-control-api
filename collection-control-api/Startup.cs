@@ -28,6 +28,7 @@ namespace collection_control_api
             services.AddDbContext<CollectionContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ICdRepository, CdRepository>();
             services.AddScoped<IDvdRepository, DvdRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
@@ -45,7 +46,7 @@ namespace collection_control_api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "collection_control_api"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "collection-control-api"));
             }
 
             app.UseHttpsRedirection();
