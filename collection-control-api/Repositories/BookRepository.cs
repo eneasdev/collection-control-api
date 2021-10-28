@@ -29,6 +29,7 @@ namespace collection_control_api.Repositories
 
             _collectionContext.SaveChanges();
         }
+        
 
         public void Delete(int id)
         {
@@ -43,9 +44,12 @@ namespace collection_control_api.Repositories
 
         public Book GetById(int id)
         {
+            Select* From Book where book.id = id
+
             var goted = _collectionContext.books
                 .OfType<Book>()
                 .FirstOrDefault(b => b.Id == id);
+
             return goted;
         }
 

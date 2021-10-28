@@ -17,6 +17,14 @@ namespace collection_control_api.Controllers
             _clientRepository = clientRepository;
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var allClients = _clientRepository.GetAll();
+
+            return Ok(allClients);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -26,7 +34,7 @@ namespace collection_control_api.Controllers
 
             if (client == null) return NotFound();
 
-            return Ok();
+            return Ok(client);
         }
 
         [HttpPost]

@@ -30,5 +30,10 @@ namespace collection_control_api.Repositories
 
             return goted;
         }
+
+        public List<Client> GetAll()
+        {
+            return _collectionContext.clients.ToList();
+        }
     }
 }
