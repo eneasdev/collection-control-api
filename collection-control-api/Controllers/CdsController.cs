@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -7,10 +8,10 @@ namespace collection_control_api.Controllers
     [Route("api/Cds")]
     public class CdsController : ControllerBase
     {
-        private readonly ICdRepository _cdService;
-        public CdsController(ICdRepository cdService)
+        private readonly ICdRepository _cdRepository;
+        public CdsController(ICdRepository cdRepository)
         {
-            _cdService = cdService;
+            _cdRepository = cdRepository;
         }
 
         [HttpGet("{id}")]
@@ -18,7 +19,7 @@ namespace collection_control_api.Controllers
         {
             if (id < 1) return BadRequest();
 
-            var cd = _cdService.GetById(id);
+            var cd = _cdRepository.GetById(id);
 
             if (cd == null) return NotFound();
 
@@ -26,21 +27,21 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Cd newCd)
+        public IActionResult Create([FromBody] NewCdInputModel newCdInputModel)
         {
-            if (newCd == null) return BadRequest();
+            if (newCdInputModel == null) return BadRequest();
 
-            _cdService.Create(newCd);
+            _cdRepository.Create(newCdInputModel);
 
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Cd updateCd)
+        public IActionResult Update(int id, UpdateItemInputModel updateCdInputModel)
         {
-            if (updateCd == null) return BadRequest();
+            if (updateCdInputModel == null) return BadRequest();
 
-            _cdService.Update(updateCd);
+            _cdRepository.Update(updateCdInputModel);
 
             return NoContent();
         }
@@ -50,7 +51,7 @@ namespace collection_control_api.Controllers
         {
             if (id < 1) return NotFound();
 
-            _cdService.Delete(id);
+            _cdRepository.Delete(id);
 
             return NoContent();
         }

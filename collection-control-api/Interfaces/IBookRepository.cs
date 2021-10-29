@@ -7,7 +7,7 @@ namespace collection_control_api.Interfaces
     {
         Book GetById(int id);
         void Create(NewBookInputModel inputModel);
-        void Update(UpdateBookInputModel inputModel);
+        void Update(UpdateItemInputModel inputModel);
         void Delete(int id);
     }
 }

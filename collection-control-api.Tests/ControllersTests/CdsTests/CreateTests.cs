@@ -1,6 +1,7 @@
 ﻿using collection_control_api.Controllers;
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -17,7 +18,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
-            var newCd = new Cd("Bicho Solto", "tazmania", 5);
+            var newCd = new NewCdInputModel();
 
             // Act
             var resultado = cdController.Create(newCd) as OkResult;
@@ -33,7 +34,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
             var cdServiceMock = new Mock<ICdRepository>();
             var cdController = new CdsController(cdServiceMock.Object);
 
-            Cd newCd = null;
+            NewCdInputModel newCd = null;
             // Act
             var resultado = cdController.Create(newCd) as BadRequestResult;
 

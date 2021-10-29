@@ -1,6 +1,7 @@
 ﻿using collection_control_api.Controllers;
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -16,7 +17,7 @@ namespace collection_control_api.Tests.ControllersTests.DvdsTests
             var dvdServiceMock = new Mock<IDvdRepository>();
             var dvdController = new DvdsController(dvdServiceMock.Object);
 
-            var newDvd = new Dvd("Rei leão", "Simba", 120);
+            var newDvd = new NewDvdInputModel();
 
             // Act
             var resultado = dvdController.Create(newDvd) as OkResult;
@@ -32,7 +33,7 @@ namespace collection_control_api.Tests.ControllersTests.DvdsTests
             var dvdServiceMock = new Mock<IDvdRepository>();
             var dvdController = new DvdsController(dvdServiceMock.Object);
 
-            Dvd newDvd = null;
+            NewDvdInputModel newDvd = null;
             // Act
             var resultado = dvdController.Create(newDvd) as BadRequestResult;
 

@@ -18,7 +18,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             var bookController = new BooksController(bookServiceMock.Object);
 
             var id = 1;
-            var updateBook = new UpdateBookInputModel() { Description = "Nice Game"};
+            var updateBook = new UpdateItemInputModel() { Description = "Nice Game"};
 
             // Act
             var resultado = bookController.Update(id, updateBook) as NoContentResult;
@@ -36,7 +36,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
 
             var id = 1;
 
-            UpdateBookInputModel updateBook = null;
+            UpdateItemInputModel updateBook = null;
 
             // Act
             var resultado = bookController.Update(id, updateBook) as BadRequestResult;

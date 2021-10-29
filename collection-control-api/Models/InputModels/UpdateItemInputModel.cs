@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Models.InputModels
 {
-    public class UpdateBookInputModel
+    public class UpdateItemInputModel
     {
         public int Id { get; set; }
         public string Description { get; set; }

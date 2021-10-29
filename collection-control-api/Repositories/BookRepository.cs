@@ -44,8 +44,6 @@ namespace collection_control_api.Repositories
 
         public Book GetById(int id)
         {
-            Select* From Book where book.id = id
-
             var goted = _collectionContext.books
                 .OfType<Book>()
                 .FirstOrDefault(b => b.Id == id);
@@ -53,7 +51,7 @@ namespace collection_control_api.Repositories
             return goted;
         }
 
-        public void Update(UpdateBookInputModel inputModel)
+        public void Update(UpdateItemInputModel inputModel)
         {
             var updateBook = GetById(inputModel.Id);
 
