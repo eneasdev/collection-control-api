@@ -46,7 +46,7 @@ namespace collection_control_api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "collection_control_api"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "collection-control-api"));
             }
 
             app.UseHttpsRedirection();

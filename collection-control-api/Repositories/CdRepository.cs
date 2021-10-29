@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace collection_control_api.Repositories
         {
             _collectionContext = collectionContext;
         }
-        public void Create(Cd inputCd)
+        public void Create(NewCdInputModel inputCd)
         {
             var newCd = new Cd("Barões da pisadinha", "Um cara ai", 5)
             {
@@ -40,13 +41,13 @@ namespace collection_control_api.Repositories
         public Cd GetById(int id)
         {
             var cd = _collectionContext.cds
-                //.OfType<Cd>()
+                .OfType<Cd>()
                 .FirstOrDefault(c => c.Id == id);
 
             return cd;
         }
 
-        public void Update(Cd inputCd)
+        public void Update(UpdateItemInputModel inputCd)
         {
             var updateCd = GetById(inputCd.Id);
 

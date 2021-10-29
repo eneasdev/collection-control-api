@@ -17,6 +17,14 @@ namespace collection_control_api.Controllers
             _clientRepository = clientRepository;
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var allClients = _clientRepository.GetAll();
+
+            return Ok(allClients);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -26,15 +34,15 @@ namespace collection_control_api.Controllers
 
             if (client == null) return NotFound();
 
-            return Ok();
+            return Ok(client);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Client client)
+        public IActionResult Create([FromBody] string clientName)
         {
-            if (client == null) return BadRequest();
+            if (string.IsNullOrEmpty(clientName)) return BadRequest();
 
-            _clientRepository.Create(client);
+            _clientRepository.Create(clientName);
 
             return Ok();
         }

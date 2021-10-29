@@ -8,7 +8,8 @@ namespace collection_control_api.Interfaces
 {
     public interface IClientRepository
     {
+        List<Client> GetAll();
         Client GetById(int id);
-        void Create(Client inputClient);
+        void Create(string inputClientName);
     }
 }

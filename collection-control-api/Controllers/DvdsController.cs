@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -26,7 +27,7 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Dvd newDvd)
+        public IActionResult Create([FromBody] NewDvdInputModel newDvd)
         {
             if (newDvd == null) return BadRequest();
 
@@ -36,11 +37,11 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] Dvd updateDvd)
+        public IActionResult Update([FromBody] UpdateItemInputModel updateDvdInputModel)
         {
-            if (updateDvd == null) return BadRequest();
+            if (updateDvdInputModel == null) return BadRequest();
 
-            _dvdService.Update(updateDvd);
+            _dvdService.Update(updateDvdInputModel);
 
             return NoContent();
         }

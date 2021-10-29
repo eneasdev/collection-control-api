@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace collection_control_api.Repositories
         {
             _collectionContext = collectionContext;
         }
-        public void Create(Dvd inputDvd)
+        public void Create(NewDvdInputModel inputDvd)
         {
             var newDvd = new Dvd("Tubarão", "Van Damme", 138)
             {
@@ -40,13 +41,13 @@ namespace collection_control_api.Repositories
         public Dvd GetById(int id)
         {
             var dvd = _collectionContext.dvds
-                //.OfType<Dvd>()
+                .OfType<Dvd>()
                 .FirstOrDefault(d => d.Id == id);
 
             return dvd;
         }
 
-        public void Update(Dvd inputDvd)
+        public void Update(UpdateItemInputModel inputDvd)
         {
             var updateDvd = GetById(inputDvd.Id);
 
