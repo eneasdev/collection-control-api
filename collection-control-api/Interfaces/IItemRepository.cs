@@ -5,7 +5,7 @@ namespace collection_control_api.Interfaces
 {
     public interface IItemRepository
     {
-        void Lend(Item item, Client client);
+        void Lend(Loan inputLoan);
         List<Item> GetAll();
         List<Item> GetItemSearch(string stringSearch);
     }

@@ -32,11 +32,11 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Lend([FromBody] Item item, [FromBody] Client client)
+        public IActionResult Lend([FromBody] Loan loanInput)
         {
-            if (item == null || client == null) return BadRequest();
+            if (loanInput == null) return BadRequest();
 
-            _itemService.Lend(item,client);
+            _itemService.Lend(loanInput);
 
             return Ok();
         }

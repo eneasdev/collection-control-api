@@ -30,15 +30,22 @@ namespace collection_control_api.Repositories
                 .ToList();
         }
 
-        public void Lend(Item item, Client client)
+        public void Lend(Loan loanInput)
         {
-            var clientLend = GetClientById(client.Id);
+            var clientLend = GetClientById(loanInput.Client.Id);
 
-            var itemLend = GetItemById(item.Id);
+            List<Item> itemsLend;
 
-            var newLoan = new Loan();
+            foreach (var i in loanInput.Item)
+            {
+                var itemLend = GetItemById(i.Id);
 
-            _collectionContext.loans.Add()
+                itemsLend.Add(itemLend);
+            }
+
+            var newLoan = new Loan(itemsLend, clientLend);
+
+            _collectionContext.loans.Add(newLoan);
 
         }
 

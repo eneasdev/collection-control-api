@@ -18,7 +18,7 @@ namespace collection_control_api.Controllers
         public IActionResult GetById(int id)
         {
             if (id < 1) return BadRequest();
-
+                        
             var book = _bookRepository.GetById(id);
 
             if (book == null) return NotFound();

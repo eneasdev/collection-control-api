@@ -30,7 +30,7 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Client client)
+        public IActionResult Create([FromBody] Client client)
         {
             if (client == null) return BadRequest();
 

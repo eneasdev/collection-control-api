@@ -28,6 +28,7 @@ namespace collection_control_api
             services.AddDbContext<CollectionContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ICdRepository, CdRepository>();
             services.AddScoped<IDvdRepository, DvdRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
