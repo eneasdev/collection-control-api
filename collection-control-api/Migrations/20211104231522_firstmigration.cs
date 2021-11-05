@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace collection_control_api.Migrations
 {
-    public partial class anothermigration : Migration
+    public partial class firstmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,7 @@ namespace collection_control_api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<int>(type: "int", nullable: true),
                     ClientId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinishedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -61,56 +62,35 @@ namespace collection_control_api.Migrations
                         principalTable: "clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ItemLoan",
-                columns: table => new
-                {
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    LoanId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemLoan", x => new { x.ItemId, x.LoanId });
                     table.ForeignKey(
-                        name: "FK_ItemLoan_items_ItemId",
+                        name: "FK_loans_items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "items",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ItemLoan_loans_LoanId",
-                        column: x => x.LoanId,
-                        principalTable: "loans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemLoan_LoanId",
-                table: "ItemLoan",
-                column: "LoanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_loans_ClientId",
                 table: "loans",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_loans_ItemId",
+                table: "loans",
+                column: "ItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ItemLoan");
-
-            migrationBuilder.DropTable(
-                name: "items");
-
-            migrationBuilder.DropTable(
                 name: "loans");
 
             migrationBuilder.DropTable(
                 name: "clients");
+
+            migrationBuilder.DropTable(
+                name: "items");
         }
     }
 }

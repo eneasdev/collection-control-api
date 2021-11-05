@@ -27,7 +27,7 @@ namespace collection_control_api
             var connectionString = Configuration.GetConnectionString("ColletionString");
             services.AddDbContext<CollectionContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<ILoanRepository, LoanRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ICdRepository, CdRepository>();
             services.AddScoped<IDvdRepository, DvdRepository>();

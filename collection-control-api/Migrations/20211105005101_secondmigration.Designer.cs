@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using collection_control_api;
 
 namespace collection_control_api.Migrations
 {
     [DbContext(typeof(CollectionContext))]
-    partial class CollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20211105005101_secondmigration")]
+    partial class secondmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

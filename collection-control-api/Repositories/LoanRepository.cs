@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
+using collection_control_api.Models.InputModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Repositories
 {
-    public class ItemRepository : IItemRepository
+    public class LoanRepository : ILoanRepository
     {
         private readonly CollectionContext _collectionContext;
-        public ItemRepository(CollectionContext collectionContext)
+        public LoanRepository(CollectionContext collectionContext)
         {
             _collectionContext = collectionContext;
 
@@ -25,27 +26,17 @@ namespace collection_control_api.Repositories
         public List<Item> GetItemSearch(string stringSearch)
         {
             return _collectionContext.items
-                .Where(i => i.Title == stringSearch || i.Description == stringSearch)
-                .Include(i => i.Loan)
+                .Where(i => i.Title.Contains(stringSearch) || i.Description.Contains(stringSearch))
                 .ToList();
         }
 
-        public void Lend(Loan loanInput)
+        public void Lend(NewLoanInputModel loanInputModel)
         {
-            var clientLend = GetClientById(loanInput.Client.Id);
-
-            List<Item> itemsLend;
-
-            foreach (var i in loanInput.Item)
-            {
-                var itemLend = GetItemById(i.Id);
-
-                itemsLend.Add(itemLend);
-            }
-
-            var newLoan = new Loan(itemsLend, clientLend);
+            var newLoan = new Loan(loanInputModel.ItemId, loanInputModel.ClientId);
 
             _collectionContext.loans.Add(newLoan);
+
+            _collectionContext.SaveChanges();
 
         }
 

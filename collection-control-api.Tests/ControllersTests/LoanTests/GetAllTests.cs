@@ -12,8 +12,8 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void NoParameters_GetAllExecuted_ShouldGetAllReturnOkObjectResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<IItemRepository>();
-            var itemController = new ItemsController(itemServiceMock.Object);
+            var itemServiceMock = new Mock<ILoanRepository>();
+            var itemController = new LoanController(itemServiceMock.Object);
 
             // Act
             var result = itemController.GetAll() as OkObjectResult;

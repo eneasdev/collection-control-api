@@ -17,7 +17,7 @@ namespace collection_control_api.Repositories
         }
         public void Create(NewCdInputModel inputCd)
         {
-            var newCd = new Cd("Barões da pisadinha", "Um cara ai", 5)
+            var newCd = new Cd(inputCd.Title, inputCd.Singer, inputCd.SongsNumber)
             {
                 Description = inputCd.Description,
                 ReleasedYear = inputCd.ReleasedYear

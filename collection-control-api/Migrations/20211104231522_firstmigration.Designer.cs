@@ -10,8 +10,8 @@ using collection_control_api;
 namespace collection_control_api.Migrations
 {
     [DbContext(typeof(CollectionContext))]
-    [Migration("20211026191749_anothermigration")]
-    partial class anothermigration
+    [Migration("20211104231522_firstmigration")]
+    partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,21 +21,6 @@ namespace collection_control_api.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ItemLoan", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LoanId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ItemId", "LoanId");
-
-                    b.HasIndex("LoanId");
-
-                    b.ToTable("ItemLoan");
-                });
-
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
@@ -43,7 +28,7 @@ namespace collection_control_api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -94,9 +79,14 @@ namespace collection_control_api.Migrations
                     b.Property<DateTime>("FinishedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("loans");
                 });
@@ -140,31 +130,27 @@ namespace collection_control_api.Migrations
                     b.HasDiscriminator().HasValue("Dvd");
                 });
 
-            modelBuilder.Entity("ItemLoan", b =>
-                {
-                    b.HasOne("collection_control_api.Entities.Item", null)
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("collection_control_api.Entities.Loan", null)
-                        .WithMany()
-                        .HasForeignKey("LoanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("collection_control_api.Entities.Loan", b =>
                 {
                     b.HasOne("collection_control_api.Entities.Client", "Client")
                         .WithMany("Loan")
                         .HasForeignKey("ClientId");
 
+                    b.HasOne("collection_control_api.Entities.Item", "Item")
+                        .WithMany("Loan")
+                        .HasForeignKey("ItemId");
+
                     b.Navigation("Client");
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>
+                {
+                    b.Navigation("Loan");
+                });
+
+            modelBuilder.Entity("collection_control_api.Entities.Item", b =>
                 {
                     b.Navigation("Loan");
                 });

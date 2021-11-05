@@ -9,26 +9,13 @@ namespace collection_control_api.Entities
 {
     public class Book : Item
     {
-        string errorMessage;
-
         public Book() { }
 
         public Book(string title, string author, int pagesNumber)
         {
-            if (TitleIsValid(title))
-                Title = title;
-            else
-                errorMessage = "Title do not must to be empty and must to have maximum 255 characters";
-
-            if (AuthorIsValid(author))
-                AddAuthor(author);
-            else
-                errorMessage = "Author name do not must to be empty and must to have maximum 255 characters";
-
-            if (PagesNumberIsValid(pagesNumber))
-                AddPagesNumber(pagesNumber);
-            else
-                errorMessage = "Pages number must to have minimum 50 pages";
+            Title = title;
+            AddAuthor(author);
+            AddPagesNumber(pagesNumber);
         }
 
         public string Author { get; private set; }
@@ -43,28 +30,28 @@ namespace collection_control_api.Entities
             PagesNumber = pagesNumber;
         }
 
-        public bool TitleIsValid(string title)
-        {
-            if (string.IsNullOrEmpty(title) || title.Length > 255) 
-                return false;
-
-            return true;
-        }
-
-        private bool AuthorIsValid(string author)
-        {
-            if (string.IsNullOrEmpty(author) || author.Length > 255 || author.Length < 3)
-                return false;
-
-            return true;
-        }
-
-        private bool PagesNumberIsValid(int pagesNumber)
-        {
-            if (pagesNumber < 50)
-                return false;
-
-            return true;
-        }
+        //public bool TitleIsValid(string title)
+        //{
+        //    if (string.IsNullOrEmpty(title) || title.Length > 255) 
+        //        return false;
+        //
+        //    return true;
+        //}
+        //
+        //private bool AuthorIsValid(string author)
+        //{
+        //    if (string.IsNullOrEmpty(author) || author.Length > 255 || author.Length < 3)
+        //        return false;
+        //
+        //    return true;
+        //}
+        //
+        //private bool PagesNumberIsValid(int pagesNumber)
+        //{
+        //    if (pagesNumber < 50)
+        //        return false;
+        //
+        //    return true;
+        //}
     }
 }

@@ -37,11 +37,11 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateItemInputModel inputModel)
+        public IActionResult Update(int id, UpdateItemInputModel UpdateBookinputModel)
         {
-            if (inputModel == null) return BadRequest();
+            if (UpdateBookinputModel == null) return BadRequest();
 
-            _bookRepository.Update(inputModel);
+            _bookRepository.Update(UpdateBookinputModel);
 
             return NoContent();
         }

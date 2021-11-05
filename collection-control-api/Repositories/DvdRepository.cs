@@ -17,7 +17,7 @@ namespace collection_control_api.Repositories
         }
         public void Create(NewDvdInputModel inputDvd)
         {
-            var newDvd = new Dvd("Tubarão", "Van Damme", 138)
+            var newDvd = new Dvd(inputDvd.Title, inputDvd.Staring, inputDvd.Duration)
             {
                 Description = inputDvd.Description,
                 ReleasedYear = inputDvd.ReleasedYear

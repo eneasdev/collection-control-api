@@ -8,10 +8,10 @@ namespace collection_control_api.Controllers
     [Route("api/Dvds")]
     public class DvdsController : ControllerBase
     {
-        private readonly IDvdRepository _dvdService;
-        public DvdsController(IDvdRepository dvdService)
+        private readonly IDvdRepository _dvdRepository;
+        public DvdsController(IDvdRepository dvdRepository)
         {
-            _dvdService = dvdService;
+            _dvdRepository = dvdRepository;
         }
 
         [HttpGet("{id}")]
@@ -19,7 +19,7 @@ namespace collection_control_api.Controllers
         {
             if (id < 1) return BadRequest();
 
-            var dvd = _dvdService.GetById(id);
+            var dvd = _dvdRepository.GetById(id);
 
             if (dvd == null) return NotFound();
 
@@ -27,11 +27,11 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] NewDvdInputModel newDvd)
+        public IActionResult Create([FromBody] NewDvdInputModel newDvdInputModel)
         {
-            if (newDvd == null) return BadRequest();
+            if (newDvdInputModel == null) return BadRequest();
 
-            _dvdService.Create(newDvd);
+            _dvdRepository.Create(newDvdInputModel);
 
             return Ok();
         }
@@ -41,7 +41,7 @@ namespace collection_control_api.Controllers
         {
             if (updateDvdInputModel == null) return BadRequest();
 
-            _dvdService.Update(updateDvdInputModel);
+            _dvdRepository.Update(updateDvdInputModel);
 
             return NoContent();
         }
@@ -51,7 +51,7 @@ namespace collection_control_api.Controllers
         {
             if (id < 1) return NotFound();
 
-            _dvdService.Delete(id);
+            _dvdRepository.Delete(id);
 
             return NoContent();
         }

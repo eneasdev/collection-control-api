@@ -12,7 +12,7 @@ namespace collection_control_api.Entities
 
         public int Id { get; set; }
         public string Name { get; private set; }
-        public List<Loan> Loan { get; private set; }
+        public Loan Loan { get; private set; }
 
         public void AddName(string name)
         {
