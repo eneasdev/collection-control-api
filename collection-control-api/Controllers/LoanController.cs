@@ -14,24 +14,6 @@ namespace collection_control_api.Controllers
             _loanRepository = loanRepository;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var items = _loanRepository.GetAll();
-        
-            return Ok(items);
-        }
-
-        [HttpGet("{string}")]
-        public IActionResult GetItemSearch(string stringSearch)
-        {
-            if (string.IsNullOrWhiteSpace(stringSearch)) return NotFound();
-
-            var items = _loanRepository.GetItemSearch(stringSearch);
-
-            return Ok(items);
-         }
-
         [HttpPost]
         public IActionResult Lend(NewLoanInputModel loanInputModel)
         {

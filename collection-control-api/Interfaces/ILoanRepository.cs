@@ -7,7 +7,5 @@ namespace collection_control_api.Interfaces
     public interface ILoanRepository
     {
         void Lend(NewLoanInputModel loanInputModel);
-        List<Item> GetAll();
-        List<Item> GetItemSearch(string stringSearch);
     }
 }

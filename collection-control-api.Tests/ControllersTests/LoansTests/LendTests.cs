@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace collection_control_api.Tests.ControllersTests.ItemsTests
+namespace collection_control_api.Tests.ControllersTests.LoansTests
 {
     public class LendTests
     {
@@ -14,8 +14,8 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void ValidIdsArePassed_LendExecuted_ShouldLendReturnOkResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<ILoanRepository>();
-            var itemController = new LoanController(itemServiceMock.Object);
+            var loanRepositoryMock = new Mock<ILoanRepository>();
+            var loanController = new LoanController(loanRepositoryMock.Object);
 
             var loan = new NewLoanInputModel()
             {
@@ -24,7 +24,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
             };
 
             // Act
-            var resultado = itemController.Lend(loan) as OkResult;
+            var resultado = loanController.Lend(loan) as OkResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 200);
@@ -34,8 +34,8 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void ClientIdPassedIsInvalid_LendExecuted_ShouldLendReturnBadRequestResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<ILoanRepository>();
-            var itemController = new LoanController(itemServiceMock.Object);
+            var loanRepositoryMock = new Mock<ILoanRepository>();
+            var loanController = new LoanController(loanRepositoryMock.Object);
 
             var loan = new NewLoanInputModel()
             {
@@ -44,7 +44,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
             };
 
             // Act
-            var resultado = itemController.Lend(loan) as BadRequestResult;
+            var resultado = loanController.Lend(loan) as BadRequestResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 400);
@@ -54,8 +54,8 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
         public void ItemIdPassedIsInvalid_LendExecuted_ShouldLendReturnBadRequestResult()
         {
             // Arrange
-            var itemServiceMock = new Mock<ILoanRepository>();
-            var itemController = new LoanController(itemServiceMock.Object);
+            var loanRepositoryMock = new Mock<ILoanRepository>();
+            var loanController = new LoanController(loanRepositoryMock.Object);
 
             var loan = new NewLoanInputModel()
             {
@@ -64,7 +64,7 @@ namespace collection_control_api.Tests.ControllersTests.ItemsTests
             };
 
             // Act
-            var resultado = itemController.Lend(loan) as BadRequestResult;
+            var resultado = loanController.Lend(loan) as BadRequestResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 400);

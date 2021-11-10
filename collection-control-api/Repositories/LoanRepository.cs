@@ -18,18 +18,6 @@ namespace collection_control_api.Repositories
 
         }
 
-        public List<Item> GetAll()
-        {
-            return _collectionContext.items.ToList();
-        }
-
-        public List<Item> GetItemSearch(string stringSearch)
-        {
-            return _collectionContext.items
-                .Where(i => i.Title.Contains(stringSearch) || i.Description.Contains(stringSearch))
-                .ToList();
-        }
-
         public void Lend(NewLoanInputModel loanInputModel)
         {
             var newLoan = new Loan(loanInputModel.ItemId, loanInputModel.ClientId);
@@ -40,14 +28,5 @@ namespace collection_control_api.Repositories
 
         }
 
-        public Item GetItemById(int id)
-        {
-            return _collectionContext.items.FirstOrDefault(i => i.Id == id);
-        }
-
-        public Client GetClientById(int id)
-        {
-            return _collectionContext.clients.FirstOrDefault(c => c.Id == id);
-        }
     }
 }
