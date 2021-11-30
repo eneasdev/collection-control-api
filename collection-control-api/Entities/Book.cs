@@ -29,29 +29,5 @@ namespace collection_control_api.Entities
         {
             PagesNumber = pagesNumber;
         }
-
-        //public bool TitleIsValid(string title)
-        //{
-        //    if (string.IsNullOrEmpty(title) || title.Length > 255) 
-        //        return false;
-        //
-        //    return true;
-        //}
-        //
-        //private bool AuthorIsValid(string author)
-        //{
-        //    if (string.IsNullOrEmpty(author) || author.Length > 255 || author.Length < 3)
-        //        return false;
-        //
-        //    return true;
-        //}
-        //
-        //private bool PagesNumberIsValid(int pagesNumber)
-        //{
-        //    if (pagesNumber < 50)
-        //        return false;
-        //
-        //    return true;
-        //}
     }
 }

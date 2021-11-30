@@ -1,4 +1,5 @@
-﻿using collection_control_api.Entities;
+﻿using AutoMapper;
+using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace collection_control_api.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
+
         public BooksController(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;

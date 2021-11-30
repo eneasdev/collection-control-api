@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using collection_control_api.Interfaces;
 using collection_control_api.Repositories;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace collection_control_api
 {
@@ -32,6 +33,8 @@ namespace collection_control_api
             services.AddScoped<ICdRepository, CdRepository>();
             services.AddScoped<IDvdRepository, DvdRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddSwaggerGen(c =>
             {

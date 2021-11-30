@@ -1,4 +1,5 @@
-﻿using collection_control_api.Entities;
+﻿using AutoMapper;
+using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
 using Microsoft.EntityFrameworkCore;
@@ -12,18 +13,17 @@ namespace collection_control_api.Repositories
     public class BookRepository : IBookRepository
     {
         private readonly CollectionContext _collectionContext;
-        public BookRepository(CollectionContext collectionContext)
+        private readonly IMapper _mapper;
+
+        public BookRepository(CollectionContext collectionContext, IMapper mapper)
         {
             _collectionContext = collectionContext;
+            _mapper = mapper;
         }
 
         public void Create(NewBookInputModel inputModel)
         {
-            var newBook = new Book(inputModel.Title, inputModel.Author, inputModel.PagesNumber)
-            {
-                Description = inputModel.Description,
-                ReleasedYear = inputModel.ReleasedYear
-            };
+            Book newBook = _mapper.Map<Book>(inputModel);
 
             _collectionContext.books.Add(newBook);
 
@@ -44,7 +44,7 @@ namespace collection_control_api.Repositories
 
         public Book GetById(int id)
         {
-            var goted = _collectionContext.books
+             var goted = _collectionContext.books
                 .OfType<Book>()
                 .FirstOrDefault(b => b.Id == id);
 
