@@ -2,6 +2,7 @@
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Dvd;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;

@@ -2,6 +2,7 @@
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Book;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -51,11 +52,11 @@ namespace collection_control_api.Repositories
             return goted;
         }
 
-        public void Update(UpdateItemInputModel inputModel)
+        public void Update(UpdateBookInputModel inputModel)
         {
             var updateBook = GetById(inputModel.Id);
 
-            updateBook.Description = inputModel.Description;
+            updateBook = _mapper.Map<Book>(inputModel);
 
             _collectionContext.books.Update(updateBook);
 

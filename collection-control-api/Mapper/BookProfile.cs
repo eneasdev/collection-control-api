@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using collection_control_api.Entities;
-using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Book;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace collection_control_api.Mapper
         public BookProfile()
         {
             this.CreateMap<NewBookInputModel, Book>();
-            this.CreateMap<UpdateItemInputModel, Book>();
+            this.CreateMap<UpdateBookInputModel, Book>();
         }
     }
 }

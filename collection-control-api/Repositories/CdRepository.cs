@@ -1,6 +1,7 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Cd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace collection_control_api.Repositories
             return cd;
         }
 
-        public void Update(UpdateItemInputModel inputCd)
+        public void Update(UpdateCdInputModel inputCd)
         {
             var updateCd = GetById(inputCd.Id);
 

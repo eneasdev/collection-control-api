@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace collection_control_api.Models.InputModels
+namespace collection_control_api.Models.InputModels.Book
 {
-    public class NewCdInputModel
+    public class NewBookInputModel
     {
         public string Title { get; set; }
         public string Description { get; set; }
         public int ReleasedYear { get; set; }
-        public string Singer { get; set; }
-        public int SongsNumber { get; set; }
+        public string Author { get; set; }
+        public int PagesNumber { get; set; }
     }
 }

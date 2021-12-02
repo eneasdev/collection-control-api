@@ -1,6 +1,7 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Cd;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -37,7 +38,7 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateItemInputModel updateCdInputModel)
+        public IActionResult Update(int id, UpdateCdInputModel updateCdInputModel)
         {
             if (updateCdInputModel == null) return BadRequest();
 

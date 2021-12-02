@@ -2,6 +2,7 @@
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Cd;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -19,7 +20,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
 
             var id = 1;
 
-            var updateCd = new UpdateItemInputModel();
+            var updateCd = new UpdateCdInputModel();
 
             // Act
             var resultado = cdController.Update(id, updateCd) as NoContentResult;
@@ -37,7 +38,7 @@ namespace collection_control_api.Tests.ControllersTests.CdsTests
 
             var id = 1;
 
-            UpdateItemInputModel updateCd = null;
+            UpdateCdInputModel updateCd = null;
 
             // Act
             var resultado = cdController.Update(id, updateCd) as BadRequestResult;

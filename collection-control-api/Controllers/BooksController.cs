@@ -2,6 +2,7 @@
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Book;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collection_control_api.Controllers
@@ -39,7 +40,7 @@ namespace collection_control_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateItemInputModel UpdateBookinputModel)
+        public IActionResult Update(int id, UpdateBookInputModel UpdateBookinputModel)
         {
             if (UpdateBookinputModel == null) return BadRequest();
 

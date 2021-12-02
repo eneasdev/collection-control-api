@@ -1,6 +1,7 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Dvd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace collection_control_api.Repositories
             return dvd;
         }
 
-        public void Update(UpdateItemInputModel inputDvd)
+        public void Update(UpdateDvdInputModel inputDvd)
         {
             var updateDvd = GetById(inputDvd.Id);
 

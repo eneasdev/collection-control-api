@@ -2,6 +2,7 @@
 using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Book;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -18,7 +19,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             var bookController = new BooksController(bookServiceMock.Object);
 
             var id = 1;
-            var updateBook = new UpdateItemInputModel() { Description = "Nice Game"};
+            var updateBook = new UpdateBookInputModel() { Description = "Nice Game"};
 
             // Act
             var resultado = bookController.Update(id, updateBook) as NoContentResult;
@@ -36,7 +37,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
 
             var id = 1;
 
-            UpdateItemInputModel updateBook = null;
+            UpdateBookInputModel updateBook = null;
 
             // Act
             var resultado = bookController.Update(id, updateBook) as BadRequestResult;

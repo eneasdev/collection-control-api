@@ -1,5 +1,6 @@
 ﻿using collection_control_api.Entities;
 using collection_control_api.Models.InputModels;
+using collection_control_api.Models.InputModels.Cd;
 
 namespace collection_control_api.Interfaces
 {
@@ -7,7 +8,7 @@ namespace collection_control_api.Interfaces
     {
         Cd GetById(int id);
         void Create(NewCdInputModel newCdInputModel);
-        void Update(UpdateItemInputModel updateCdInputModel);
+        void Update(UpdateCdInputModel updateCdInputModel);
         void Delete(int id);
     }
 }
