@@ -18,7 +18,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
 
             var id = 1;
 
-            var book = new Cd() { Id = 1, Description = "Not a fun game" };
+            var book = new Book() { Id = 1, Description = "Not a fun game" };
 
             bookServiceMock.Setup(b => b.GetById(id)).Returns(book);
 
@@ -53,7 +53,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
 
             var id = 1;
 
-            Cd nullBook = null;
+            Book nullBook = null;
 
             bookServiceMock.Setup(b => b.GetById(1)).Returns(nullBook);
 

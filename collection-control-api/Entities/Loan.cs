@@ -15,8 +15,10 @@ namespace collection_control_api.Entities
         }
 
         public int Id { get; set; }
-        public int ItemId { get; private set; }
-        public int ClientId { get; private set; }
+        public int ItemId { get; set; }
+        public Item Item { get; set; }
+        public int ClientId { get; set; }
+        public Client Client { get; set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime FinishedAt { get; private set; }
 

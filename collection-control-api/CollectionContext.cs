@@ -15,7 +15,7 @@ namespace collection_control_api
         public DbSet<Item> items { get; set; }
         public DbSet<Dvd> dvds { get; set; }
         public DbSet<Cd> cds { get; set; }
-        public DbSet<Cd> books { get; set; }
+        public DbSet<Book> books { get; set; }
         public DbSet<Loan> loans { get; set; }
         public DbSet<Client> clients { get; set; }
 

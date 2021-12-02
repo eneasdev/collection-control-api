@@ -12,8 +12,8 @@ namespace collection_control_api.Mapper
     {
         public BookProfile()
         {
-            this.CreateMap<NewBookInputModel, Cd>();
-            this.CreateMap<UpdateBookInputModel, Cd>();
+            this.CreateMap<NewBookInputModel, Book>();
+            this.CreateMap<UpdateBookInputModel, Book>();
         }
     }
 }

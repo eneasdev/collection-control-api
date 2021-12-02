@@ -10,8 +10,8 @@ using collection_control_api;
 namespace collection_control_api.Migrations
 {
     [DbContext(typeof(CollectionContext))]
-    [Migration("20211105005101_secondmigration")]
-    partial class secondmigration
+    [Migration("20211202203200_SecondMigration")]
+    partial class SecondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,8 +84,9 @@ namespace collection_control_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId")
-                        .IsUnique();
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("loans");
                 });
@@ -131,16 +132,26 @@ namespace collection_control_api.Migrations
 
             modelBuilder.Entity("collection_control_api.Entities.Loan", b =>
                 {
-                    b.HasOne("collection_control_api.Entities.Client", null)
-                        .WithOne("Loan")
-                        .HasForeignKey("collection_control_api.Entities.Loan", "ClientId")
+                    b.HasOne("collection_control_api.Entities.Client", "Client")
+                        .WithMany("Loans")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("collection_control_api.Entities.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>
                 {
-                    b.Navigation("Loan");
+                    b.Navigation("Loans");
                 });
 #pragma warning restore 612, 618
         }

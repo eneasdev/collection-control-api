@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace collection_control_api.Migrations
 {
-    public partial class firstmigration : Migration
+    public partial class firstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,8 +48,8 @@ namespace collection_control_api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemId = table.Column<int>(type: "int", nullable: true),
-                    ClientId = table.Column<int>(type: "int", nullable: true),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinishedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -61,19 +61,20 @@ namespace collection_control_api.Migrations
                         column: x => x.ClientId,
                         principalTable: "clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_loans_items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "items",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_loans_ClientId",
                 table: "loans",
-                column: "ClientId");
+                column: "ClientId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_loans_ItemId",

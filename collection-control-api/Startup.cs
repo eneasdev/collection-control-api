@@ -26,8 +26,13 @@ namespace collection_control_api
             services.AddControllers();
 
             var connectionString = Configuration.GetConnectionString("ColletionString");
-            services.AddDbContext<CollectionContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<CollectionContext>(options =>
+                {
+                    options.UseSqlServer(connectionString);
+                    options.EnableSensitiveDataLogging();
+                });
 
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<ILoanRepository, LoanRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ICdRepository, CdRepository>();

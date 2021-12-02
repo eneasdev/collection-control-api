@@ -1,4 +1,5 @@
-﻿using collection_control_api.Entities;
+﻿using AutoMapper;
+using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
 using collection_control_api.Models.InputModels.Dvd;
@@ -12,17 +13,16 @@ namespace collection_control_api.Repositories
     public class DvdRepository : IDvdRepository
     {
         private readonly CollectionContext _collectionContext;
-        public DvdRepository(CollectionContext collectionContext)
+        private readonly IMapper _mapper;
+
+        public DvdRepository(CollectionContext collectionContext, IMapper mapper)
         {
             _collectionContext = collectionContext;
+            _mapper = mapper;
         }
         public void Create(NewDvdInputModel inputDvd)
         {
-            var newDvd = new Dvd(inputDvd.Title, inputDvd.Staring, inputDvd.Duration)
-            {
-                Description = inputDvd.Description,
-                ReleasedYear = inputDvd.ReleasedYear
-            };
+            Dvd newDvd = _mapper.Map<Dvd>(inputDvd);
 
             _collectionContext.dvds.Add(newDvd);
 
@@ -52,7 +52,7 @@ namespace collection_control_api.Repositories
         {
             var updateDvd = GetById(inputDvd.Id);
 
-            updateDvd.Description = inputDvd.Description;
+            updateDvd = _mapper.Map<Dvd>(inputDvd);
 
             _collectionContext.dvds.Update(updateDvd);
 

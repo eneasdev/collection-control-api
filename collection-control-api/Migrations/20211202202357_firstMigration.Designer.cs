@@ -10,8 +10,8 @@ using collection_control_api;
 namespace collection_control_api.Migrations
 {
     [DbContext(typeof(CollectionContext))]
-    [Migration("20211104231522_firstmigration")]
-    partial class firstmigration
+    [Migration("20211202202357_firstMigration")]
+    partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,7 @@ namespace collection_control_api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClientId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -79,12 +79,13 @@ namespace collection_control_api.Migrations
                     b.Property<DateTime>("FinishedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientId")
+                        .IsUnique();
 
                     b.HasIndex("ItemId");
 
@@ -133,12 +134,16 @@ namespace collection_control_api.Migrations
             modelBuilder.Entity("collection_control_api.Entities.Loan", b =>
                 {
                     b.HasOne("collection_control_api.Entities.Client", "Client")
-                        .WithMany("Loan")
-                        .HasForeignKey("ClientId");
+                        .WithOne("Loan")
+                        .HasForeignKey("collection_control_api.Entities.Loan", "ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("collection_control_api.Entities.Item", "Item")
-                        .WithMany("Loan")
-                        .HasForeignKey("ItemId");
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 
@@ -146,11 +151,6 @@ namespace collection_control_api.Migrations
                 });
 
             modelBuilder.Entity("collection_control_api.Entities.Client", b =>
-                {
-                    b.Navigation("Loan");
-                });
-
-            modelBuilder.Entity("collection_control_api.Entities.Item", b =>
                 {
                     b.Navigation("Loan");
                 });
