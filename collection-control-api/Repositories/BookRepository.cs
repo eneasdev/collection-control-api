@@ -24,7 +24,7 @@ namespace collection_control_api.Repositories
 
         public void Create(NewBookInputModel inputModel)
         {
-            Book newBook = _mapper.Map<Book>(inputModel);
+            Cd newBook = _mapper.Map<Cd>(inputModel);
 
             _collectionContext.books.Add(newBook);
 
@@ -43,10 +43,10 @@ namespace collection_control_api.Repositories
             _collectionContext.SaveChanges();
         }
 
-        public Book GetById(int id)
+        public Cd GetById(int id)
         {
              var goted = _collectionContext.books
-                .OfType<Book>()
+                .OfType<Cd>()
                 .FirstOrDefault(b => b.Id == id);
 
             return goted;
@@ -56,7 +56,7 @@ namespace collection_control_api.Repositories
         {
             var updateBook = GetById(inputModel.Id);
 
-            updateBook = _mapper.Map<Book>(inputModel);
+            updateBook = _mapper.Map<Cd>(inputModel);
 
             _collectionContext.books.Update(updateBook);
 

@@ -1,4 +1,5 @@
-﻿using collection_control_api.Entities;
+﻿using AutoMapper;
+using collection_control_api.Entities;
 using collection_control_api.Interfaces;
 using collection_control_api.Models.InputModels;
 using collection_control_api.Models.InputModels.Cd;
@@ -12,17 +13,16 @@ namespace collection_control_api.Repositories
     public class CdRepository : ICdRepository
     {
         private readonly CollectionContext _collectionContext;
-        public CdRepository(CollectionContext collectionContext)
+        private readonly IMapper _mapper;
+
+        public CdRepository(CollectionContext collectionContext, IMapper mapper)
         {
             _collectionContext = collectionContext;
+            _mapper = mapper;
         }
         public void Create(NewCdInputModel inputCd)
         {
-            var newCd = new Cd(inputCd.Title, inputCd.Singer, inputCd.SongsNumber)
-            {
-                Description = inputCd.Description,
-                ReleasedYear = inputCd.ReleasedYear
-            };
+            Cd newCd = _mapper.Map<Cd>(inputCd);
 
             _collectionContext.cds.Add(newCd);
 
@@ -52,7 +52,7 @@ namespace collection_control_api.Repositories
         {
             var updateCd = GetById(inputCd.Id);
 
-            updateCd.Description = inputCd.Description;
+            updateCd = _mapper.Map<Cd>(inputCd);
 
             _collectionContext.cds.Update(updateCd);
 
