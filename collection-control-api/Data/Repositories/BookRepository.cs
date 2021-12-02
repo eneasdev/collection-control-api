@@ -26,7 +26,7 @@ namespace collection_control_api.Repositories
         {
             Book newBook = _mapper.Map<Book>(inputModel);
 
-            _collectionContext.books.Add(newBook);
+            _collectionContext.Books.Add(newBook);
 
             _collectionContext.SaveChanges();
         }
@@ -34,10 +34,10 @@ namespace collection_control_api.Repositories
 
         public void Delete(int id)
         {
-            var book = _collectionContext.books
+            var book = _collectionContext.Books
                 .FirstOrDefault(b => b.Id == id);
 
-            _collectionContext.books
+            _collectionContext.Books
                 .Remove(book);
 
             _collectionContext.SaveChanges();
@@ -45,7 +45,7 @@ namespace collection_control_api.Repositories
 
         public Book GetById(int id)
         {
-             var goted = _collectionContext.books
+             var goted = _collectionContext.Books
                 .OfType<Book>()
                 .FirstOrDefault(b => b.Id == id);
 
@@ -58,7 +58,7 @@ namespace collection_control_api.Repositories
 
             updateBook = _mapper.Map<Book>(inputModel);
 
-            _collectionContext.books.Update(updateBook);
+            _collectionContext.Books.Update(updateBook);
 
             _collectionContext.SaveChanges();
         }

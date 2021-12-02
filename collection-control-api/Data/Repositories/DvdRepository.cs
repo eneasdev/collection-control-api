@@ -24,7 +24,7 @@ namespace collection_control_api.Repositories
         {
             Dvd newDvd = _mapper.Map<Dvd>(inputDvd);
 
-            _collectionContext.dvds.Add(newDvd);
+            _collectionContext.Dvds.Add(newDvd);
 
             _collectionContext.SaveChanges();
         }
@@ -33,7 +33,7 @@ namespace collection_control_api.Repositories
         {
             var dvd = GetById(id);
 
-            _collectionContext.dvds
+            _collectionContext.Dvds
                 .Remove(dvd);
 
             _collectionContext.SaveChanges();
@@ -41,7 +41,7 @@ namespace collection_control_api.Repositories
 
         public Dvd GetById(int id)
         {
-            var dvd = _collectionContext.dvds
+            var dvd = _collectionContext.Dvds
                 .OfType<Dvd>()
                 .FirstOrDefault(d => d.Id == id);
 
@@ -54,7 +54,7 @@ namespace collection_control_api.Repositories
 
             updateDvd = _mapper.Map<Dvd>(inputDvd);
 
-            _collectionContext.dvds.Update(updateDvd);
+            _collectionContext.Dvds.Update(updateDvd);
 
             _collectionContext.SaveChanges();
         }

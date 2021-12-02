@@ -24,7 +24,7 @@ namespace collection_control_api.Repositories
         {
             Cd newCd = _mapper.Map<Cd>(inputCd);
 
-            _collectionContext.cds.Add(newCd);
+            _collectionContext.Cds.Add(newCd);
 
             _collectionContext.SaveChanges();
         }
@@ -33,7 +33,7 @@ namespace collection_control_api.Repositories
         {
             var cd = GetById(id);
 
-            _collectionContext.cds
+            _collectionContext.Cds
                 .Remove(cd);
 
             _collectionContext.SaveChanges();
@@ -41,7 +41,7 @@ namespace collection_control_api.Repositories
 
         public Cd GetById(int id)
         {
-            var cd = _collectionContext.cds
+            var cd = _collectionContext.Cds
                 .OfType<Cd>()
                 .FirstOrDefault(c => c.Id == id);
 
@@ -54,7 +54,7 @@ namespace collection_control_api.Repositories
 
             updateCd = _mapper.Map<Cd>(inputCd);
 
-            _collectionContext.cds.Update(updateCd);
+            _collectionContext.Cds.Update(updateCd);
 
             _collectionContext.SaveChanges();
         }

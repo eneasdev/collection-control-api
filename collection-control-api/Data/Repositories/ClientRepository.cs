@@ -19,21 +19,21 @@ namespace collection_control_api.Repositories
         {
             var newClient = new Client(inputClient);
 
-            _collectionContext.clients.Add(newClient);
+            _collectionContext.Clients.Add(newClient);
 
             _collectionContext.SaveChanges();
         }
 
         public Client GetById(int id)
         {
-            var goted = _collectionContext.clients.FirstOrDefault(c => c.Id == id);
+            var goted = _collectionContext.Clients.FirstOrDefault(c => c.Id == id);
 
             return goted;
         }
 
         public List<Client> GetAll()
         {
-            return _collectionContext.clients.ToList();
+            return _collectionContext.Clients.ToList();
         }
     }
 }

@@ -12,12 +12,12 @@ namespace collection_control_api
     {
         public CollectionContext(DbContextOptions<CollectionContext> options) : base(options) { }
 
-        public DbSet<Item> items { get; set; }
-        public DbSet<Dvd> dvds { get; set; }
-        public DbSet<Cd> cds { get; set; }
-        public DbSet<Book> books { get; set; }
-        public DbSet<Loan> loans { get; set; }
-        public DbSet<Client> clients { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Dvd> Dvds { get; set; }
+        public DbSet<Cd> Cds { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Loan> Loans { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

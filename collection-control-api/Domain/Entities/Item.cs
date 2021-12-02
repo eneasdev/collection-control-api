@@ -9,5 +9,6 @@ namespace collection_control_api.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public int ReleasedYear { get; set; }
+
     }
 }

@@ -19,14 +19,14 @@ namespace collection_control_api.Repositories
 
         public List<Item> GetAll()
         {
-            return _collectionContext.items
+            return _collectionContext.Items
                 //.Include(item => item as Book)
                 .ToList();
         }
 
         public List<Item> GetItemSearch(string stringSearch)
         {
-            return _collectionContext.items
+            return _collectionContext.Items
                 .Where(i => i.Title.Contains(stringSearch) || i.Description.Contains(stringSearch))
                 .ToList();
         }
