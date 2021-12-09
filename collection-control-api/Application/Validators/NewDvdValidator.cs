@@ -1,4 +1,4 @@
-﻿using collection_control_api.Models.InputModels.Book;
+﻿using collection_control_api.Models.InputModels.Dvd;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace collection_control_api.Application.Validators
 {
-    public class NewBookValidator : AbstractValidator<NewBookInputModel>
+    public class NewDvdValidator : AbstractValidator<NewDvdInputModel>
     {
-        public NewBookValidator()
+        public NewDvdValidator()
         {
             RuleFor(p => p.Title)
                 .NotEmpty().WithMessage("The title can not be empty.")
@@ -17,20 +17,20 @@ namespace collection_control_api.Application.Validators
                 .MaximumLength(255).WithMessage("The title maximum length is 255 .");
 
 
-            RuleFor(p => p.Author)
+            RuleFor(p => p.Staring)
                 .NotEmpty()
                 .NotNull()
-                .MaximumLength(255).WithMessage("The author's name maximum lenght is 255 characteres and can not be empty.");
+                .MaximumLength(255).WithMessage("The star name maximum lenght is 255 characteres and can not be empty.");
 
             RuleFor(p => p.Description)
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(255).WithMessage("The book description maximum lenght is 255 characteres and can not be empty.");
 
-            RuleFor(p => p.PagesNumber)
+            RuleFor(p => p.Duration)
                 .GreaterThan(0)
-                .LessThan(1000)
-                .NotEmpty().WithMessage("The number of pages maximum lenght is 1000 and can not be empty.");
+                .LessThan(500)
+                .NotEmpty().WithMessage("The duration time maximum is 500 minutes and can not be empty.");
 
             RuleFor(p => p.ReleasedYear)
                 .NotEmpty()

@@ -30,8 +30,6 @@ namespace collection_control_api.Controllers
         {
             if (loanInputModel == null) return BadRequest();
 
-            if (loanInputModel.ClientId <= 0 || loanInputModel.ItemId <= 0) return BadRequest();
-
             _loanRepository.Lend(loanInputModel);
 
             return Ok();
