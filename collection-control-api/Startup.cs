@@ -8,6 +8,9 @@ using collection_control_api.Interfaces;
 using collection_control_api.Repositories;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using FluentValidation.AspNetCore;
+using collection_control_api.Models.InputModels.Book;
+using collection_control_api.API.Filters;
 
 namespace collection_control_api
 {
@@ -23,7 +26,8 @@ namespace collection_control_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)))
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<NewBookInputModel>());
 
             var connectionString = Configuration.GetConnectionString("ColletionString");
             services.AddDbContext<CollectionContext>(options =>

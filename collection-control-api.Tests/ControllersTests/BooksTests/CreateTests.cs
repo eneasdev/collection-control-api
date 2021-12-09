@@ -21,25 +21,26 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             var newBook = new NewBookInputModel();
 
             // Act
-            var resultado = bookController.Create(newBook) as OkResult;
+            var resultado = bookController.Create(newBook);
 
             // Assert
-            Assert.True(resultado.StatusCode == 200);
+            Assert.IsType<OkResult>(resultado);
         }
 
         [Fact]
-        public void NullIsPassed_ExecuteCreate_CreateShouldReturnBadRequestResult()
+        public void NullIsPassed_ExecuteCreate_CreateShouldReturnBadRequestObjectResult()
         {
             // Arrange
             var bookServiceMock = new Mock<IBookRepository>();
             var bookController = new BooksController(bookServiceMock.Object);
 
             NewBookInputModel newBook = null;
-            // Act
-            var resultado = bookController.Create(newBook) as BadRequestResult;
 
+            // Act
+            var resultado = bookController.Create(newBook);
+            
             // Assert
-            Assert.True(resultado.StatusCode == 400);
+            Assert.IsType<BadRequestObjectResult>(resultado);
         }
     }
 }

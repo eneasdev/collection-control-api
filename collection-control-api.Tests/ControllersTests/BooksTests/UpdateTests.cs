@@ -29,7 +29,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
         }
 
         [Fact]
-        public void NullIsPassed_ExecuteUpdate_UpdateShouldReturnBadRequestResult()
+        public void NullIsPassed_ExecuteUpdate_UpdateShouldReturnBadRequestObjectResult()
         {
             // Arrange
             var bookServiceMock = new Mock<IBookRepository>();
@@ -40,7 +40,7 @@ namespace collection_control_api.Tests.ControllersTests.BooksTests
             UpdateBookInputModel updateBook = null;
 
             // Act
-            var resultado = bookController.Update(id, updateBook) as BadRequestResult;
+            var resultado = bookController.Update(id, updateBook) as BadRequestObjectResult;
 
             // Assert
             Assert.True(resultado.StatusCode == 400);
